@@ -1,8 +1,87 @@
 from tkinter import*
 from PIL import Image, ImageTk 
+from random import*
 
 
 
+
+
+# Création des fonctions pour le jeu 
+
+
+
+def recup_gain(numero1,numero2,numero3):
+    liste_num = [numero1,numero2,numero3]
+
+    occ_de_un = liste_num.count(1)
+    occ_de_deux = liste_num.count(2)
+    occ_de_trois = liste_num.count(3)
+
+    if occ_de_un == 3 :
+        gain = 1000
+    elif occ_de_un == 2 :
+        gain = 500
+
+    elif occ_de_deux == 3 :
+        gain = 500
+    elif occ_de_deux == 2 :
+        gain = 250
+    
+    elif occ_de_trois == 3 :
+        gain = 100
+    elif occ_de_trois == 2 :
+        gain = 50
+
+    else :
+        gain = 0
+
+    return gain 
+
+
+
+
+
+
+def recup_image(numero):
+    if numero == 1 :
+        img = Image.open("valentin.png")
+        img = img.resize((114,170))
+        return ImageTk.PhotoImage(img)
+    elif numero == 2:
+        img = Image.open("louis.png")
+        img = img.resize((114,170))
+        return ImageTk.PhotoImage(img)
+    
+    else :
+        img = Image.open("tom.png")
+        img = img.resize((114,170))
+        return ImageTk.PhotoImage(img)
+
+
+
+
+
+def jouer():
+     canva.delete("texte")
+     global case1,case2,case3
+
+     n1 = randint(1,3)
+     n2 =randint(1,3)
+     n3 =randint(1,3)
+     case1 = recup_image(n1)
+     case2 = recup_image(n2)
+     case3 = recup_image(n3)
+
+     canva.create_image(760,335,image=case1)
+     canva.create_image(889,335,image=case2)
+     canva.create_image(1017,335,image=case3)
+
+     canva.create_text(1300,330,text=f"Gain : {recup_gain(n1,n2,n3)} VTL",font=("Arial",25),fill="white",tags="texte")
+     
+
+
+   
+    
 # Création de la fenêtre (qui sera une frame par la suite)
 
 
@@ -76,13 +155,15 @@ canva.create_text(1350,100,text=f"Solde : {solde} VTL",font=("Arial",15),fill="w
 
 # Création du boutton lancer
 
-lancer = Button(canva,text="Lancer la roue (400 VTL)",width=35,height=2)
+lancer = Button(canva,text="Lancer la roue (400 VTL)",width=35,height=2,command=jouer)
 lancer.place(x=775,y=600)
 
 
 
+# Création du boutton quitter
 
-
+quitter = Button(canva,text="Quitter",width=30,height=2)
+quitter.place(x=1250,y=700)
 
 
 
