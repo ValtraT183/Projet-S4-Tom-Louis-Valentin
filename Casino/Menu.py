@@ -1,69 +1,57 @@
 from tkinter import *
 from PIL import Image, ImageTk 
 
-# Création de la fenêtre
+def creerFrameMenu(parent, retourner, nom_uti, solde_uti, quitter):
 
-fenetre = Tk()
-fenetre.title("Casino")
-fenetre.iconbitmap("casinologo.ico")
-fenetre.geometry("1500x750")
+    # Création de la frame
+    frame_menu = Frame(parent, width=1500, height=750)
 
-# Création du canva 
+    # Création du canva
+    canva = Canvas(frame_menu, width=1500, height=750)
+    canva.pack()
 
-canva = Canvas(fenetre, width=1500, height=750)
-canva.place(x= 0,y=0)
-
-
-# Fond de la fenêtre
-
-image = Image.open("background.png")
-image = image.resize((1500, 750))
-photo_background = ImageTk.PhotoImage(image)
-canva.create_image(0, 0, anchor=NW, image=photo_background)
+    # Fond de la fenêtre
+    image = Image.open("Casino/background.png")
+    image = image.resize((1500, 750))
+    canva.photo_background = ImageTk.PhotoImage(image)
+    canva.create_image(0, 0, anchor=NW, image=canva.photo_background)
 
 
-# Titre
+    # Titre
+    canva.titre = PhotoImage(file="Casino/titre.png").subsample(2)
+    canva.create_image(750,100,image = canva.titre)
 
-titre = PhotoImage(file="titre.png").subsample(2)
-canva.create_image(750,100,image = titre)
+
+    # Création des boutons
+    blackjack = Button(canva,text = "BlackJack",width=50,height=2)
+    blackjack.place(x=580,y=250)
+
+    machine = Button(canva,text="Machine à sous",width=50,height=2)
+    machine.place(x=580,y=350)
+
+    roulette = Button(canva,text="Roulette",width=50,height=2)
+    roulette.place(x=580,y=450)
 
 
-# Création des boutons
+    des = Button(canva,text="Jeu de dés",width=50,height=2)
+    des.place(x=580,y=550)
 
-blackjack = Button(canva,text = "BlackJack",width=50,height=2)
-blackjack.place(x=580,y=250)
+    retour = Button(canva, text="Se déconnecter", width=30, height=2, command=retourner)
+    retour.place(x=1250, y=600)
 
-machine = Button(canva,text="Machine à sous",width=50,height=2)
-machine.place(x=580,y=350)
-
-roulette = Button(canva,text="Roulette",width=50,height=2)
-roulette.place(x=580,y=450)
-
-roulette = Button(canva,text="Roulette",width=50,height=2)
-roulette.place(x=580,y=450)
-
-des = Button(canva,text="Jeu de dés",width=50,height=2)
-des.place(x=580,y=550)
-
-quitter = Button(canva,text="Quitter",width=30,height=2)
-quitter.place(x=1250,y=700)
+    quitter = Button(canva,text="Quitter",width=30,height=2, command=quitter)
+    quitter.place(x=1250,y=700)
 
 
 
-# Affichage du nom de l'utilisateur et du solde
+    # Affichage du nom de l'utilisateur et du solde
 
-nom_uti = "Moi"
-canva.create_text(1350,50,text=f"Nom d'utilisateur : {nom_uti}",font=("Arial",15),fill="white")
+    canva.create_text(1350,50,text=f"Nom d'utilisateur : {nom_uti}",font=("Arial",15),fill="white")
 
-solde = 20000
-canva.create_text(1350,100,text=f"Solde : {solde} VTL",font=("Arial",15),fill="white")
+    canva.create_text(1350,100,text=f"Solde : {solde_uti} VTL",font=("Arial",15),fill="white")
 
-
-
-
-
-
-
-
-
-fenetre.mainloop()
+    return{
+        "frame": frame_menu,
+        "nom": nom_uti,
+        "mdp": solde_uti
+    }
