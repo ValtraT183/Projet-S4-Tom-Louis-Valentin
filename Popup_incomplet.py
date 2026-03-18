@@ -1,0 +1,14 @@
+from tkinter import *
+
+
+def afficherPopUpIncomplet(parent):
+
+    fen = Toplevel(parent)
+
+    Label(fen, text="Veuillez saisir toutes les données").pack()
+
+    def retour():
+
+        fen.destroy()
+
+    Button(fen, text="Retour", command=retour).pack()
