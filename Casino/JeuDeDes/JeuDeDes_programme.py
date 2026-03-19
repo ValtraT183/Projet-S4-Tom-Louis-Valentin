@@ -62,7 +62,7 @@ canva.create_image(20,30,image=logo)
 
 fenetre.mainloop()
 
-
+"""
 # TOUR DU JEU
 def _mise_valide(self):
     try:
@@ -77,3 +77,4 @@ def _tour(self):
             mise = int(self.var_mise_get())
             if mise < MISE_MIN: 
                 self
+"""
