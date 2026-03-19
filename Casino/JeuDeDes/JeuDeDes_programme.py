@@ -44,7 +44,7 @@ fenetre.geometry("1500x750")
 
 # Création du canva
 canva = Canvas(fenetre, width=1500, height=750)
-canva.place(x= 0,y=0)
+canva.place(x = 0,y = 0)
 
 
 # Fond de la fenêtre
@@ -64,3 +64,16 @@ fenetre.mainloop()
 
 
 # TOUR DU JEU
+def _mise_valide(self):
+    try:
+        mise = int(self.var_mise.get())
+        return MISE_MIN <= mise <= self.solde
+    except ValueError:
+        return False
+
+def _tour(self):
+    if not self._mise_valide():
+        try:
+            mise = int(self.var_mise_get())
+            if mise < MISE_MIN: 
+                self
