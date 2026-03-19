@@ -1,10 +1,16 @@
 from tkinter import *
 from PIL import Image, ImageTk
+
 from Frame_connexion import creerFrameConnexion
 from Casino.Frame_menu import creerFrameMenu
+from Frame_creerCompte import creerFrameCreerCompte
+
+#importation PopUp
 from Popup_incomplet import afficherPopUpIncomplet
 from Popup_inconnu import afficherPopUpInconnu
-
+from Popup_18ans import afficherPopUp18ans
+from Popup_politique import afficherPopUppolitique
+from Popup_nompris import afficherPopUpnompris
 
 #importation Jeux
 
@@ -59,7 +65,7 @@ def creerMachineASous():
     frame_machine_a_sous = creerFrameMachineASous(fenetre, fin_jeu_MachineAsous, nom_uti, solde_uti, fenetre.destroy)
 
     frame_menu["frame"].pack_forget()
-    frame_machine_a_sous["frame"].pack(fill="both", expand=True) #échange des frames => retour menu casino à menu connexion
+    frame_machine_a_sous["frame"].pack(fill="both", expand=True) #échange des frames => retour menu machine à sous à menu casino
 
 
 
@@ -71,11 +77,11 @@ def creerJeuDeDes():
     frame_jeu_de_des = creerFrameJeuDeDes(fenetre, fin_jeu_JeuDeDes, nom_uti, solde_uti, fenetre.destroy)
 
     frame_menu["frame"].pack_forget()
-    frame_jeu_de_des["frame"].pack(fill="both", expand=True) #échange des frames => retour menu casino à menu connexion
+    frame_jeu_de_des["frame"].pack(fill="both", expand=True) #échange des frames => retour menu jeu de dés à menu casino
 
 
 
-# Fonctions
+# Fonctions valider connexion
 
 def valider():
     global nom_uti
@@ -118,18 +124,78 @@ def valider():
     return afficherPopUpInconnu(fenetre) #erreur identifiant ou mdp inconnu
 
 
-# Fonction retour
-def menuToConnexion():
+# Fonction valider création compte
+def actualiserTxt(nom,mdp):
+    with open("Compte.txt","a",encoding="utf-8") as compte :
+        compte.write(f"{nom}/{mdp}/{1000}\n")
 
-    frame_menu["frame"].pack_forget()
+def valider_nouveau_compte():
+    if frame_creer_compte["id"].get() == "" or frame_creer_compte["mdp"].get() == "" or frame_creer_compte["age"].get() == "":
+        return afficherPopUpIncomplet(fenetre)
+
+    nom = frame_creer_compte["id"].get()   #on récupère son nom 
+    mdp = frame_creer_compte["mdp"].get()  #on récupère son mdp
+    age = int(frame_creer_compte["age"].get())  #on récupère son age
+    politique = frame_creer_compte["politique"].get()
+
+    frame_creer_compte["id"].delete(0,'end')
+    frame_creer_compte["mdp"].delete(0,'end')
+    frame_creer_compte["age"].set("")       #Vider les Entry
+    frame_creer_compte["politique"].set(0)
+
+    if age <= 18:           # Vérification age
+        return afficherPopUp18ans(fenetre)
+    
+    if not politique:   # Vérification politique
+        return afficherPopUppolitique(fenetre)
+    
+
+    liste=[]
+    with open("Compte.txt", "r",encoding="utf-8") as compte:
+            ligne=compte.readlines()
+    for i in ligne:
+        liste.append(i.split("/"))
+
+    for el in liste:
+        el[2] = el[2][:-1]
+
+    for el in liste:        #Vérification que le nom n'est pas déjà utilisé
+        if nom == el[0]:
+            return afficherPopUpnompris(fenetre)
+    
+    return actualiserTxt(nom,mdp), CreerCompteToConnexion()
+    
+
+
+
+# Fonction afficher menu creer compte
+frame_creer_compte = None
+def creerCreerCompte():
+    global frame_connexion
+    global frame_creer_compte
+
+    frame_creer_compte = creerFrameCreerCompte(fenetre, CreerCompteToConnexion, valider_nouveau_compte, fenetre.destroy)
+
+    frame_connexion["frame"].pack_forget()
+    frame_creer_compte["frame"].pack(fill="both", expand=True) #échange des frames => retour menu jeu de dés à menu casino
+
+
+
+# Fonction retour menu creercompte à menu connexion
+def CreerCompteToConnexion():
+    frame_creer_compte["frame"].pack_forget()
     frame_connexion["frame"].pack(fill="both", expand=True) #échange des frames => retour menu casino à menu connexion
 
 
 
+# Fonction retour menu casino à menu connexion
+def menuToConnexion():
+    frame_menu["frame"].pack_forget()
+    frame_connexion["frame"].pack(fill="both", expand=True) #échange des frames => retour menu casino à menu connexion
 
 
 #affichage menu connexion
-frame_connexion = creerFrameConnexion(fenetre, valider, fenetre.destroy)
+frame_connexion = creerFrameConnexion(fenetre, valider, fenetre.destroy, creerCreerCompte)
 frame_connexion["frame"].pack(fill="both", expand=True)
 
 # Démarrage de la boucle Tkinter (à placer à la fin !!!)

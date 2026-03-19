@@ -5,7 +5,7 @@ from PIL import Image, ImageTk
 
 
 
-def creerFrameConnexion(parent,valider,quitter):
+def creerFrameConnexion(parent,valider,quitter, creerCreerCompte):
 
     # Création de la frame
     frame_connexion = Frame(parent, height=750, width=1500)
@@ -29,17 +29,17 @@ def creerFrameConnexion(parent,valider,quitter):
     canva.create_text(200,100, text= "Connexion", justify=CENTER, fill = "firebrick", font="Rye 50")
 
     canva.create_text(200,300, text= "Identifiant : ", justify=CENTER, fill = "gold", font="Limelight 27")
-    entree_id = Entry(parent, width= 50)
+    entree_id = Entry(canva, width= 50)
     entree_id.place(x=550,y=300)
 
 
     canva.create_text(200,400, text= "Mot de passe : ", justify=CENTER, fill = "gold", font="Limelight 27")
-    entree_mdp = Entry(parent, width=50,show="*")
+    entree_mdp = Entry(canva, width=50,show="*")
     entree_mdp.place(x=550,y=400)
 
 
 
-    bouton_creer_compte = Button(parent,text="Créer un nouveau compte",padx=20,pady=10)        #CHANGER DE FRAME
+    bouton_creer_compte = Button(parent,text="Créer un nouveau compte", command=creerCreerCompte, padx=20, pady=10)        #CHANGER DE FRAME
     bouton_valider = Button(parent,text="Se connecter", command=valider,padx=20,pady=10)
     bouton_quit = Button(parent, text ="Quitter", command=quitter, bg='red',padx=20,pady=10)
     bouton_creer_compte.place(x=525,y=500)
