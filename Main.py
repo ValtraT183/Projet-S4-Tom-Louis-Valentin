@@ -29,8 +29,24 @@ fenetre.geometry("1500x750")
 
 
 # Frames Jeux
-def fin_jeu():
-    pass
+def fin_jeu_JeuDeDes():
+    global frame_jeu_de_des
+    global frame_menu
+
+    frame_jeu_de_des["frame"].pack_forget()
+    frame_menu["frame"].pack(fill="both", expand=True)
+
+
+
+
+def fin_jeu_MachineAsous():
+    global frame_machine_a_sous
+    global frame_menu
+
+    frame_machine_a_sous["frame"].pack_forget()
+    frame_menu["frame"].pack(fill="both", expand=True)
+
+
 
 frame_machine_a_sous = None
 frame_jeu_de_des = None
@@ -40,7 +56,7 @@ def creerMachineASous():
     global frame_menu
     global frame_machine_a_sous
 
-    frame_machine_a_sous = creerFrameMachineASous(fenetre, fin_jeu, nom_uti, solde_uti, fenetre.destroy)
+    frame_machine_a_sous = creerFrameMachineASous(fenetre, fin_jeu_MachineAsous, nom_uti, solde_uti, fenetre.destroy)
 
     frame_menu["frame"].pack_forget()
     frame_machine_a_sous["frame"].pack(fill="both", expand=True) #échange des frames => retour menu casino à menu connexion
@@ -52,7 +68,7 @@ def creerJeuDeDes():
     global frame_menu
     global frame_jeu_de_des
 
-    frame_jeu_de_des = creerFrameJeuDeDes(fenetre, fin_jeu, nom_uti, solde_uti, fenetre.destroy)
+    frame_jeu_de_des = creerFrameJeuDeDes(fenetre, fin_jeu_JeuDeDes, nom_uti, solde_uti, fenetre.destroy)
 
     frame_menu["frame"].pack_forget()
     frame_jeu_de_des["frame"].pack(fill="both", expand=True) #échange des frames => retour menu casino à menu connexion
@@ -107,6 +123,8 @@ def menuToConnexion():
 
     frame_menu["frame"].pack_forget()
     frame_connexion["frame"].pack(fill="both", expand=True) #échange des frames => retour menu casino à menu connexion
+
+
 
 
 
