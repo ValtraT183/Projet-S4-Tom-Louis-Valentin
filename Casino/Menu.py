@@ -1,7 +1,7 @@
 from tkinter import *
 from PIL import Image, ImageTk 
 
-def creerFrameMenu(parent, retourner, nom_uti, solde_uti, quitter):
+def creerFrameMenu(parent, retourner, nom_uti, solde_uti, quitter, creerMachineASous):
 
     # Création de la frame
     frame_menu = Frame(parent, width=1500, height=750)
@@ -26,7 +26,7 @@ def creerFrameMenu(parent, retourner, nom_uti, solde_uti, quitter):
     blackjack = Button(canva,text = "BlackJack",width=50,height=2)
     blackjack.place(x=580,y=250)
 
-    machine = Button(canva,text="Machine à sous",width=50,height=2)
+    machine = Button(canva,text="Machine à sous",width=50,height=2, command=creerMachineASous)
     machine.place(x=580,y=350)
 
     roulette = Button(canva,text="Roulette",width=50,height=2)
@@ -55,3 +55,7 @@ def creerFrameMenu(parent, retourner, nom_uti, solde_uti, quitter):
         "nom": nom_uti,
         "mdp": solde_uti
     }
+
+
+
+

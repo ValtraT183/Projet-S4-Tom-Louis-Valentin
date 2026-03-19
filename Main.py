@@ -5,6 +5,9 @@ from Casino.Menu import creerFrameMenu
 from Popup_incomplet import afficherPopUpIncomplet
 from Popup_inconnu import afficherPopUpInconnu
 
+#importation Jeux
+
+from Casino.MachineASous.MachineASous_interface import creerFrameMachineASous
 
 
 
@@ -23,6 +26,21 @@ fenetre.title("Casino - Connexion")
 fenetre.geometry("1500x750")
 
 
+
+# Frames Jeux
+def fin_jeu():
+    pass
+
+frame_machine_a_sous = None
+
+def creerMachineASous():
+    global frame_menu
+    global frame_machine_a_sous
+
+    frame_machine_a_sous = creerFrameMachineASous(fenetre, fin_jeu, nom_uti, solde_uti, fenetre.destroy)
+
+    frame_menu["frame"].pack_forget()
+    frame_machine_a_sous["frame"].pack(fill="both", expand=True) #échange des frames => retour menu casino à menu connexion
 
 # Fonctions
 
@@ -60,7 +78,7 @@ def valider():
                 solde_uti = el[2] #on récupère son solde dans la variable global
 
                 frame_connexion["frame"].pack_forget()
-                frame_menu = creerFrameMenu(fenetre, retourner, nom_uti, solde_uti, fenetre.destroy) #on passe au menu
+                frame_menu = creerFrameMenu(fenetre, retourner, nom_uti, solde_uti, fenetre.destroy, creerMachineASous) #on passe au menu
                 frame_menu["frame"].pack(fill="both", expand=True) #on affiche le menu
                 return None
 
@@ -81,4 +99,9 @@ frame_connexion["frame"].pack(fill="both", expand=True)
 
 # Démarrage de la boucle Tkinter (à placer à la fin !!!)
 fenetre.mainloop()
+
+
+
+
+
 
