@@ -1,6 +1,9 @@
 from tkinter import*
 from PIL import Image, ImageTk 
 from random import*
+from MachineASous_verifgain import*
+
+
 
 
 
@@ -81,6 +84,7 @@ def jouer():
 
 
    
+   
     
 # Création de la fenêtre (qui sera une frame par la suite)
 
@@ -109,7 +113,7 @@ canva.create_image(0, 0, anchor=NW, image=photo_background)
 
 # Titre
 
-canva.create_text(550,50,text="Machine à sous",fill='white',font=("Arial",40))
+canva.create_text(550,50,text="Machine à sous",fill="white",font=("Arial",40))
 
 
 # Barème 
@@ -164,6 +168,14 @@ lancer.place(x=775,y=600)
 
 quitter = Button(canva,text="Quitter",width=30,height=2)
 quitter.place(x=1250,y=700)
+
+
+
+
+
+
+
+
 
 
 

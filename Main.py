@@ -4,7 +4,7 @@ from Frame_connexion import creerFrameConnexion
 from Casino.Menu import creerFrameMenu
 from Popup_incomplet import afficherPopUpIncomplet
 from Popup_inconnu import afficherPopUpInconnu
-
+from CreerCompte import*
 
 
 
@@ -25,6 +25,11 @@ fenetre.geometry("1500x750")
 
 
 # Fonctions
+def quitter() :
+     return fenetre.destroy()
+
+
+
 
 def valider():
     global nom_uti
@@ -73,12 +78,63 @@ def retourner():
     frame_menu["frame"].pack_forget()
     frame_connexion["frame"].pack(fill="both", expand=True) #échange des frames => retour menu casino à menu connexion
 
+def creercompte():
+    frame_creercompte = creerFrameCreerCompte(fenetre, valider_nouveau_compte, quitter)
+    frame_connexion["frame"].pack_forget()
+    frame_creercompte["frame"].pack(fill="both", expand=True)
 
 
-#affichage menu connexion
-frame_connexion = creerFrameConnexion(fenetre, valider, fenetre.destroy)
-frame_connexion["frame"].pack(fill="both", expand=True)
 
-# Démarrage de la boucle Tkinter (à placer à la fin !!!)
+
+
+
+def valider_nouveau_compte(age,nom,mdp):
+    global nom_uti
+    global mdp_uti
+    global solde_uti
+    global frame_menu
+
+    # Vérification que les entrées sont remplis
+    if frame_connexion["id"].get() == "" or frame_connexion["mdp"].get() == "":
+        return afficherPopUpIncomplet(fenetre)
+    
+    nom_uti = frame_connexion["id"].get()   #on récupère son nom dans la variable global
+    mdp_uti = frame_connexion["mdp"].get()  #on récupère son mdp dans la variable global
+
+
+    # Affichage menu connexion
+    frame_connexion = creerFrameConnexion(fenetre, valider, creercompte, quitter)
+    frame_connexion["frame"].pack(fill="both", expand=True)
+    # Vider les Entry
+    frame_connexion["id"].delete(0,'end')
+    frame_connexion["mdp"].delete(0,'end')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Démarrage de la boucle Tkinter 
 fenetre.mainloop()
 
