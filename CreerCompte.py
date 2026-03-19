@@ -31,13 +31,13 @@ def creerFrameCreerCompte(parent,valider_nouveau_compte,quitter):
     canva.pack()
     # Fond de la fenêtre
 
-    image = Image.open("Casino/background.png")
+    image = Image.open("Image/background.png")
     image = image.resize((1500, 750))
     canva.photo_background = ImageTk.PhotoImage(image)
     canva.create_image(0, 0, anchor=NW, image=canva.photo_background)
 
     # Titre
-    canva.titre = PhotoImage(file="Casino/titre.png").subsample(2)
+    canva.titre = PhotoImage(file="Image/titre.png").subsample(2)
     canva.create_image(750,100,image = canva.titre)
 
 

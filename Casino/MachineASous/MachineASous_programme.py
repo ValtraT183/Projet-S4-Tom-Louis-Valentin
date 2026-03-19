@@ -40,16 +40,16 @@ def recup_gain(numero1,numero2,numero3):
 
 def recup_image(numero):
     if numero == 1 :
-        img = Image.open("valentin.png")
+        img = Image.open("Image/valentin.png")
         img = img.resize((114,170))
         return ImageTk.PhotoImage(img)
     elif numero == 2:
-        img = Image.open("louis.png")
+        img = Image.open("Image/louis.png")
         img = img.resize((114,170))
         return ImageTk.PhotoImage(img)
     
     else :
-        img = Image.open("tom.png")
+        img = Image.open("Image/tom.png")
         img = img.resize((114,170))
         return ImageTk.PhotoImage(img)
 
