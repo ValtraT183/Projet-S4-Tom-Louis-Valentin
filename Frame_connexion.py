@@ -34,7 +34,7 @@ def creerFrameConnexion(parent,valider,quitter):
 
 
     canva.create_text(200,400, text= "Mot de passe : ", justify=CENTER, fill = "gold", font="Limelight 27")
-    entree_mdp = Entry(parent, width=50)
+    entree_mdp = Entry(parent, width=50,show="*")
     entree_mdp.place(x=550,y=400)
 
 
