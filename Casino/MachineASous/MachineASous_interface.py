@@ -40,7 +40,7 @@ def creerFrameMachineASous(parent, fin_jeu, nom, solde, quitter):
 
     # Fond de la fenêtre
 
-    image = Image.open("Casino/background.png")
+    image = Image.open("Image/background.png")
     image = image.resize((1500, 750))
     canva.photo_background = ImageTk.PhotoImage(image)
     canva.create_image(0, 0, anchor=NW, image=canva.photo_background)
@@ -56,17 +56,17 @@ def creerFrameMachineASous(parent, fin_jeu, nom, solde, quitter):
 
     canva.create_text(100,150,text=f"Barème :",font=("Arial",20),fill="white")
 
-    canva.valentin = PhotoImage(file="Casino/MachineASous/valentin.png").subsample(15)
+    canva.valentin = PhotoImage(file="Image/valentin.png").subsample(15)
     canva.create_image(100,250,image=canva.valentin)
     canva.create_text(210,250,text="x 3 > 1000 VTL",fill="white",font=("Arial,20"))
     canva.create_text(210,275,text="x 2 > 500 VTL  ",fill="white",font=("Arial,20"))
 
-    canva.louis = PhotoImage(file="Casino/MachineASous/louis.png").subsample(16)
+    canva.louis = PhotoImage(file="Image/louis.png").subsample(16)
     canva.create_image(100,400,image=canva.louis)
     canva.create_text(205,400,text="x 3 > 500 VTL",fill="white",font=("Arial,20"))
     canva.create_text(205,425,text="x 2 > 250 VTL",fill="white",font=("Arial,20"))
 
-    canva.tom = PhotoImage(file="Casino/MachineASous/tom.png").subsample(14)
+    canva.tom = PhotoImage(file="Image/tom.png").subsample(14)
     canva.create_image(100,550,image=canva.tom)
     canva.create_text(205,550,text="x 3 > 100 VTL",fill="white",font=("Arial,20"))
     canva.create_text(205,575,text="x 2 > 50 VTL  ",fill="white",font=("Arial,20"))
@@ -79,7 +79,7 @@ def creerFrameMachineASous(parent, fin_jeu, nom, solde, quitter):
 
     # Création de la machine à sous
 
-    canva.machine = PhotoImage(file = "Casino/MachineASous/machine.png").subsample(3)
+    canva.machine = PhotoImage(file = "Image/machine.png").subsample(3)
     canva.create_image(900,350,image=canva.machine)
 
 
