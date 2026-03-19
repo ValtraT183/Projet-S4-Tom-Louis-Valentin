@@ -9,7 +9,7 @@ from Casino.MachineASous.MachineASous_programme import recup_gain, recup_image
 # Création de la fenêtre (qui sera une frame par la suite)
 
 
-def creerFrameMachineASous(parent, fin_jeu, nom, solde, quitter):
+def creerFrameMachineASous(fenetre, fin_jeu, nom, solde, quitter):
     
     def jouer():
         canva.delete("texte")
@@ -29,12 +29,12 @@ def creerFrameMachineASous(parent, fin_jeu, nom, solde, quitter):
         canva.create_text(1300,330,text=f"Gain : {recup_gain(n1,n2,n3)} VTL",font=("Arial",25),fill="white",tags="texte")
 
     #Création de la frame
-    frame_connexion = Frame(parent, height=750, width=1500)
+    frame_machine_a_sous = Frame(fenetre, height=750, width=1500)
 
 
     # Création du canva 
 
-    canva = Canvas(frame_connexion, width=1500, height=750)
+    canva = Canvas(frame_machine_a_sous, width=1500, height=750)
     canva.place(x= 0,y=0)
 
 
@@ -104,7 +104,7 @@ def creerFrameMachineASous(parent, fin_jeu, nom, solde, quitter):
     quitter.place(x=1250,y=700)
 
     return {
-        "frame": frame_connexion,
+        "frame": frame_machine_a_sous,
         "nom_uti": nom,
         "solde_uti": solde,
     }
