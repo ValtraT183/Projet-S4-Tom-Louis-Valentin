@@ -1,14 +1,15 @@
 from tkinter import *
 from PIL import Image, ImageTk
 from Frame_connexion import creerFrameConnexion
-from Casino.Menu import creerFrameMenu
+from Casino.Frame_menu import creerFrameMenu
 from Popup_incomplet import afficherPopUpIncomplet
 from Popup_inconnu import afficherPopUpInconnu
 
+
 #importation Jeux
 
-from Casino.MachineASous.MachineASous_interface import creerFrameMachineASous
-
+from Casino.MachineASous.Frame_machineASous import creerFrameMachineASous
+from Casino.JeuDeDes.Frame_jeuDeDes import creerFrameJeuDeDes
 
 
 #variables globales
@@ -21,7 +22,7 @@ frame_menu = None
 # Création d'un objet "fenêtre"
 fenetre = Tk()
 # Titre de la fenêtre
-fenetre.title("Casino - Connexion")
+fenetre.title("Casino")
 # Taille de la fenêtre
 fenetre.geometry("1500x750")
 
@@ -32,6 +33,8 @@ def fin_jeu():
     pass
 
 frame_machine_a_sous = None
+frame_jeu_de_des = None
+
 
 def creerMachineASous():
     global frame_menu
@@ -41,6 +44,20 @@ def creerMachineASous():
 
     frame_menu["frame"].pack_forget()
     frame_machine_a_sous["frame"].pack(fill="both", expand=True) #échange des frames => retour menu casino à menu connexion
+
+
+
+
+def creerJeuDeDes():
+    global frame_menu
+    global frame_jeu_de_des
+
+    frame_jeu_de_des = creerFrameJeuDeDes(fenetre, fin_jeu, nom_uti, solde_uti, fenetre.destroy)
+
+    frame_menu["frame"].pack_forget()
+    frame_jeu_de_des["frame"].pack(fill="both", expand=True) #échange des frames => retour menu casino à menu connexion
+
+
 
 # Fonctions
 
@@ -78,7 +95,7 @@ def valider():
                 solde_uti = el[2] #on récupère son solde dans la variable global
 
                 frame_connexion["frame"].pack_forget()
-                frame_menu = creerFrameMenu(fenetre, retourner, nom_uti, solde_uti, fenetre.destroy, creerMachineASous) #on passe au menu
+                frame_menu = creerFrameMenu(fenetre, menuToConnexion, nom_uti, solde_uti, fenetre.destroy, creerMachineASous, creerJeuDeDes) #on passe au menu
                 frame_menu["frame"].pack(fill="both", expand=True) #on affiche le menu
                 return None
 
@@ -86,7 +103,7 @@ def valider():
 
 
 # Fonction retour
-def retourner():
+def menuToConnexion():
 
     frame_menu["frame"].pack_forget()
     frame_connexion["frame"].pack(fill="both", expand=True) #échange des frames => retour menu casino à menu connexion
