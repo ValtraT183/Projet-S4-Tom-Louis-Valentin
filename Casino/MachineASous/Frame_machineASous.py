@@ -1,4 +1,5 @@
 from tkinter import*
+from tkinter import ttk
 from PIL import Image, ImageTk 
 from random import*
 from Casino.MachineASous.MachineASous_programme import recup_gain, recup_image
@@ -26,7 +27,10 @@ def creerFrameMachineASous(fenetre, fin_jeu, nom, solde, quitter):
         canva.create_image(889,335,image=case2)
         canva.create_image(1017,335,image=case3)
 
-        canva.create_text(1300,330,text=f"Gain : {recup_gain(n1,n2,n3)} VTL",font=("Arial",25),fill="white",tags="texte")
+        canva.create_text(1300,330,text=f"Gain : {recup_gain(n1,n2,n3,int(mise.get()))} VTL",font=("Arial",25),fill="white",tags="texte")
+
+
+
 
     #Création de la frame
     frame_machine_a_sous = Frame(fenetre, height=750, width=1500)
@@ -91,10 +95,33 @@ def creerFrameMachineASous(fenetre, fin_jeu, nom, solde, quitter):
 
 
 
+
+    # Création menu déroulant pour sélectionner la mise 
+    
+    liste_mise =[5,10,20,50,100,200,500,1000]
+    mise = ttk.Combobox(canva,values=liste_mise,state="readonly")
+    mise.place(x=300,y=400)    
+    
+
+
     # Création du bouton lancer
 
-    lancer = Button(canva,text="Lancer la roue (400 VTL)",width=35,height=2,command=jouer)
+    lancer = Button(canva,text=f"Lancer la machine",width=35,height=2,command=jouer)
     lancer.place(x=775,y=600)
+
+
+
+    
+
+
+    
+    # Création du boutton retour au menu 
+
+    retour = Button(canva,text="Retour",width=30,height=2, command=fin_jeu)
+    retour.place(x=1250,y=600)
+
+
+
 
 
 
@@ -102,6 +129,16 @@ def creerFrameMachineASous(fenetre, fin_jeu, nom, solde, quitter):
 
     quitter = Button(canva,text="Quitter",width=30,height=2, command=quitter)
     quitter.place(x=1250,y=700)
+
+   
+   # Affichage du nom de l'utilisateur et du solde
+
+    canva.create_text(1350,50,text=f"Nom d'utilisateur : {nom}",font=("Arial",15),fill="white")
+    canva.create_text(1350,100,text=f"Solde : {solde} VTL",font=("Arial",15),fill="white")
+
+
+
+
 
     return {
         "frame": frame_machine_a_sous,
