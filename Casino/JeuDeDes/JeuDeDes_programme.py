@@ -13,7 +13,7 @@ def recup_gain(mise,tot_a,tot) :
         if tot_a > tot :
                 return 0
         elif tot_a == tot :
-                return mise/2
+                return round(mise/2)
         else :
-                return mise*2
+                return round(mise*2)
         
