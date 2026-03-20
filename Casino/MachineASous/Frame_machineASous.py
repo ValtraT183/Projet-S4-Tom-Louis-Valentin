@@ -7,7 +7,7 @@ from Casino.MachineASous.MachineASous_programme import recup_gain, recup_image
 
 
     
-# Création de la fenêtre (qui sera une frame par la suite)
+
 
 
 def creerFrameMachineASous(fenetre, fin_jeu, nom, solde, quitter):
@@ -101,6 +101,7 @@ def creerFrameMachineASous(fenetre, fin_jeu, nom, solde, quitter):
     liste_mise =[5,10,20,50,100,200,500,1000]
     mise = ttk.Combobox(canva,values=liste_mise,state="readonly")
     mise.place(x=300,y=400)    
+    mise.current(0)
     
 
 
@@ -112,15 +113,10 @@ def creerFrameMachineASous(fenetre, fin_jeu, nom, solde, quitter):
 
 
     
-
-
-    
     # Création du boutton retour au menu 
 
     retour = Button(canva,text="Retour",width=30,height=2, command=fin_jeu)
     retour.place(x=1250,y=600)
-
-
 
 
 
