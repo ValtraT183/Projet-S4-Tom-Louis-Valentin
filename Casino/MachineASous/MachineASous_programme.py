@@ -31,7 +31,7 @@ def recup_gain(numero1,numero2,numero3,mise):
     else :
         gain = 0
 
-    return gain 
+    return round(gain)
 
 
 

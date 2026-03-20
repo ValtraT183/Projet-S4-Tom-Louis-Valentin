@@ -134,7 +134,8 @@ def creerFrameJeuDeDes(parent, fin_jeu, nom, solde, quitter):
     
     liste_mise =[5,10,20,50,100,200,500,1000]
     mise = ttk.Combobox(canva,values=liste_mise,state="readonly")
-    mise.place(x=300,y=400)    
+    mise.place(x=300,y=400) 
+    mise.current(0)   
     
 
 
