@@ -64,16 +64,3 @@ fenetre.mainloop()
 
 
 # TOUR DU JEU
-def _mise_valide(self):
-    try:
-        mise = int(self.var_mise.get())
-        return MISE_MIN <= mise <= self.solde
-    except ValueError:
-        return False
-
-def _tour(self):
-    if not self._mise_valide():
-        try:
-            mise = int(self.var_mise_get())
-            if mise < MISE_MIN: 
-                self
