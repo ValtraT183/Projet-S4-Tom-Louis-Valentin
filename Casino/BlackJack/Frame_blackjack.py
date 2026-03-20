@@ -2,48 +2,15 @@ from tkinter import*
 from tkinter import ttk
 from PIL import Image, ImageTk 
 from random import*
-from Casino.JeuDeDes.JeuDeDes_programme import recup_gain, recup_image
+from Casino.Blackjack.Blackjack_programme import*
 
 
 
 
-def creerFrameJeuDeDes(parent, fin_jeu, nom, solde, quitter):
+def creerFrameBlackjack(parent, fin_jeu, nom, solde, quitter):
 
     def jouer():
-        global de1,de2,de3,de1a,de2a,de3a
-        global n1,n2,n3,n1a,n2a,n3a
-
-        
-        
-        n1, n2, n3 = randint(1,6), randint(1,6), randint(1,6)
-        n1a, n2a, n3a = randint(1,6), randint(1,6), randint(1,6)
-
-        de1 = recup_image(n1)
-        de2 = recup_image(n2)
-        de3 = recup_image(n3)
-
-        de1a = recup_image(n1a)
-        de2a = recup_image(n2a)
-        de3a = recup_image(n3a)
-
-
-        # joueur du haut
-        canva.create_image(625,150,image=de1a)
-        canva.create_image(750,200,image=de2a)
-        canva.create_image(875,150,image=de3a)
-
-        # joueur du bas
-        canva.create_image(625,550,image=de1)
-        canva.create_image(750,600,image=de2)
-        canva.create_image(870,550,image=de3)
-
-        
-        tot_b = n1a+n2a+n3a
-        tot_u = n1+n2+n3
-        canva.itemconfig(total_banque, text=f"Total banque : {tot_b}")
-        canva.itemconfig(total_joueur, text=f"Total : {tot_u}")
-        canva.itemconfig(gain,text=f"Gain : {recup_gain(int(mise.get()),tot_b,tot_u)}")
-        
+        pass
 
 
 
@@ -51,12 +18,12 @@ def creerFrameJeuDeDes(parent, fin_jeu, nom, solde, quitter):
     
     #Création de la frame
 
-    frame_jeu_de_des = Frame(parent, height=750, width=1500)
+    frame_blackjack = Frame(parent, height=750, width=1500)
 
 
     # Création du canva 
 
-    canva = Canvas(frame_jeu_de_des, width=1500, height=750)
+    canva = Canvas(frame_blackjack, width=1500, height=750)
     canva.place(x= 0,y=0)
 
 
@@ -69,7 +36,7 @@ def creerFrameJeuDeDes(parent, fin_jeu, nom, solde, quitter):
 
     
     # Titre
-    canva.create_text(200,50,text="Jeu de dés",fill='white',font=("Arial",40))
+    canva.create_text(200,50,text="Blackjack",fill='white',font=("Arial",40))
 
     canva.create_line(400,0,400,750,fill="black",width=2)
 
@@ -120,7 +87,7 @@ def creerFrameJeuDeDes(parent, fin_jeu, nom, solde, quitter):
 
     # Création bouton lancer les dés
 
-    lancer = Button(canva,text="Lancer les dés",width=20,command=jouer)
+    lancer = Button(canva,text="cartes",width=20,command=jouer)
     lancer.place(x=100,y=400)
         
 
@@ -130,8 +97,7 @@ def creerFrameJeuDeDes(parent, fin_jeu, nom, solde, quitter):
     
     liste_mise =[5,10,20,50,100,200,500,1000]
     mise = ttk.Combobox(canva,values=liste_mise,state="readonly")
-    mise.place(x=300,y=400) 
-    mise.current(0)   
+    mise.place(x=300,y=400)    
     
 
 
@@ -144,7 +110,7 @@ def creerFrameJeuDeDes(parent, fin_jeu, nom, solde, quitter):
 
 
     return {
-        "frame": frame_jeu_de_des,
+        "frame": frame_blackjack,
         "nom_uti": nom,
         "solde_uti": solde,
     }
