@@ -95,7 +95,7 @@ def creerFrameMachineASous(fenetre, fin_jeu, nom, solde, quitter):
 
 
 
-
+    
     # Création menu déroulant pour sélectionner la mise 
     
     liste_mise =[5,10,20,50,100,200,500,1000]
@@ -110,7 +110,6 @@ def creerFrameMachineASous(fenetre, fin_jeu, nom, solde, quitter):
 
     lancer = Button(canva,text=f"Lancer la machine",width=35,height=2,command=jouer)
     lancer.place(x=775,y=580)
-
 
 
     
