@@ -3,19 +3,188 @@ from tkinter import ttk
 from PIL import Image, ImageTk 
 from random import*
 from Casino.Blackjack.Blackjack_programme import*
+from time import*
 
 
 
 
 def creerFrameBlackjack(parent, fin_jeu, nom, solde, quitter):
 
-    def jouer():
+    carte_croupier = []
+    carte_joueur = []
+
+
+
+
+    def commencer_partie():
+        global carte_croupier
+        global carte_joueur
+
+        carte_croupier = [tirer_cartes()]
+        carte_joueur = [tirer_cartes(),tirer_cartes()]
+
+        afficher_carte()
+
+        afficher_score()
+
+
+    def tirer():
+        global carte_joueur
+
+        carte_joueur.append(tirer_cartes())
+        afficher_carte()
+
+        score = score_joueur(carte_joueur)
+
+        if score > 21:
+            afficher_score()
+            canva.create_text(750,375,text="Vous avez dépassé 21, perdu", tags="resultat")
+            return actualiser_gain(0)
+
+        elif score == 21:
+            afficher_score()
+            canva.create_text(750,375,text = "Blackjack !!", tags="resultat")
+            return actualiser_gain(1)
+        
+        else:
+            afficher_score()
+
+
+
+    def rester():
+        global carte_croupier
+
+        while True:
+            score = score_croupier(carte_croupier)
+
+            if type(score) == tuple:
+                score = max(score)
+
+            if score >= 16:
+                break
+
+            carte_croupier.append(tirer_cartes())
+            afficher_carte()
+
+
+        if score > 21:
+            canva.create_text(750,375,text="Le croupier a dépassé 21, vous avez gagné", tags="resultat")
+            return actualiser_gain(1)
+
+        elif score == 21:
+            canva.create_text(750,375,text = "Blackjack !! Le croupier a gagné", tags="resultat")
+            return actualiser_gain(0)
+            
+        afficher_score()
+        return verif_score()
+        
+
+
+
+    def verif_score():
+        global carte_croupier
+        global carte_joueur
+
+        score_c = score_croupier(carte_croupier)
+        score_j = score_joueur(carte_joueur)
+
+        if type(score_c) == tuple:
+            score_c = max(score_c)
+
+        if type(score_j) == tuple:
+            score_j = max(score_j)
+        
+        if score_c > score_j:
+            return actualiser_gain(0)   #le joueur a perdu
+        elif score_c == score_j:
+            return actualiser_gain(2)   # égalité
+        else:
+            return actualiser_gain(1)   # le joueur a gagné
+        
+
+
+    def actualiser_gain(win):
+        """
+        win = 0 --> le joueur a perdu
+        win = 1 --> le joueur a gagné
+        win = 2 --> égalité
+        """
+        #Faire logique gain
+
+        return reset()
+
+
+    def reset():
+        """
+        canva.after(5000)
+        canva.delete("resultat")
+        canva.delete("cartes") #on enleve les cartes
+        """
         pass
 
 
+    def tirer_cartes():
+        liste_cartes = [
+        "carreau-2", "carreau-3", "carreau-4", "carreau-5", "carreau-6", "carreau-7",
+        "carreau-8", "carreau-9", "carreau-10", "carreau-valet", "carreau-dame", "carreau-roi", "carreau-as",
 
- 
+        "coeur-2", "coeur-3", "coeur-4", "coeur-5", "coeur-6", "coeur-7",
+        "coeur-8", "coeur-9", "coeur-10", "coeur-valet", "coeur-dame", "coeur-roi", "coeur-as",
+
+        "trefle-2", "trefle-3", "trefle-4", "trefle-5", "trefle-6", "trefle-7",
+        "trefle-8", "trefle-9", "trefle-10", "trefle-valet", "trefle-dame", "trefle-roi", "trefle-as",
+
+        "pique-2", "pique-3", "pique-4", "pique-5", "pique-6", "pique-7",
+        "pique-8", "pique-9", "pique-10", "pique-valet", "pique-dame", "pique-roi", "pique-as" 
+        ]
+       
+        return choice(liste_cartes)
     
+
+    def afficher_score():
+        global carte_joueur
+        global carte_croupier
+        
+        canva.delete("score") #On efface les scores affichés
+
+        croupier = score_croupier(carte_croupier)
+        joueur = score_joueur(carte_joueur)
+
+        canva.create_text(750,270,text=f"Score Croupier : {croupier}",fill='white',font=("Arial",20), tags="score")
+        canva.create_text(750,480,text=f"Votre Score : {joueur}",fill='white',font=("Arial",20), tags="score")
+    
+
+    #fonction pour afficher les cartes sur la frame
+    def afficher_carte():
+        global carte_croupier
+        global carte_joueur
+
+        canva.delete("cartes") #On efface les cartes déjà placés
+        canva.images = []  #Pour stocker les images
+
+        nb_carte_croupier = len(carte_croupier)
+        nb_carte_joueur = len(carte_joueur)
+
+        if nb_carte_croupier > 1:
+            ecart_carte_croupier = 280/(nb_carte_croupier-1)
+        else:
+            ecart_carte_croupier = 0
+
+        ecart_carte_joueur = 280/(nb_carte_joueur-1)
+        
+        for i,carte in enumerate(carte_croupier):
+
+            img = recup_image(carte)
+            canva.images.append(img)
+            canva.create_image(610 + i*ecart_carte_croupier ,175,image=img, tags= "cartes")
+
+        for i,carte in enumerate(carte_joueur):
+
+            img = recup_image(carte)
+            canva.images.append(img)
+            canva.create_image(610 + i*ecart_carte_joueur ,575,image=img, tags= "cartes")
+
+
     #Création de la frame
 
     frame_blackjack = Frame(parent, height=750, width=1500)
@@ -34,7 +203,7 @@ def creerFrameBlackjack(parent, fin_jeu, nom, solde, quitter):
     canva.photo_background = ImageTk.PhotoImage(image)
     canva.create_image(0, 0, anchor=NW, image=canva.photo_background)
 
-    
+
     # Titre
     canva.create_text(200,50,text="Blackjack",fill='white',font=("Arial",40))
 
@@ -63,12 +232,6 @@ def creerFrameBlackjack(parent, fin_jeu, nom, solde, quitter):
    
 
 
-
-    # Affichage des totaux
-    total_banque = canva.create_text(750,270,text=f"Total banque : {0}",fill='white',font=("Arial",20))
-    total_joueur = canva.create_text(750,480,text=f"Total : {0}",fill='white',font=("Arial",20))
-
-
     # Création du bouton quitter
 
     quitter = Button(canva,text="Quitter",width=30,height=2, command=quitter)
@@ -82,15 +245,21 @@ def creerFrameBlackjack(parent, fin_jeu, nom, solde, quitter):
     retour.place(x=1250,y=600)
 
 
+    #Débuter la partie
+
+    commencer = Button(canva,text="cartes",width=20,command=commencer_partie)
+    commencer.place(x=100,y=400)
 
 
+    # Création bouton tirer une carte
 
-    # Création bouton lancer les dés
-
-    lancer = Button(canva,text="cartes",width=20,command=jouer)
-    lancer.place(x=100,y=400)
+    bouton_tirer = Button(canva,text="Tirer",width=20,command=tirer)
+    bouton_tirer.place(x=600,y=600)
         
+    # Bouton rester
 
+    bouton_rester = Button(canva,text="Rester",width=20,command=rester)
+    bouton_rester.place(x=600,y=700)
 
 
     # Création menu déroulant pour sélectionner la mise 
