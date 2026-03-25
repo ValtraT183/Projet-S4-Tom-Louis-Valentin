@@ -1,5 +1,4 @@
 from PIL import Image, ImageTk 
-from random import*
 
 
 # Création des fonctions pour le jeu 
