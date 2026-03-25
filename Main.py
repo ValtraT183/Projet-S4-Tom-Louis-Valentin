@@ -1,5 +1,5 @@
 from tkinter import *
-from PIL import Image, ImageTk
+
 
 from Frame_connexion import creerFrameConnexion
 from Casino.Frame_menu import creerFrameMenu
