@@ -69,10 +69,19 @@ def creerFrameJeuDeDes(parent, fin_jeu, nom, solde, quitter):
 
     
     # Titre
-    canva.create_text(200,50,text="Jeu de dés",fill='white',font=("Arial",40))
+    canva.create_text(200,50,text="Jeu de dés",fill='firebrick',font="Rye 37")
 
     canva.create_line(400,0,400,750,fill="black",width=2)
 
+    # Affichage des règles
+    canva.create_text(200,200, text="Le joueur donne une mise puis lance 3 dés.",fill="gold",font="Limelight 13")
+    canva.create_text(200,250, text="Le croupier fait de même.",fill="gold",font="Limelight 13")
+    canva.create_text(200,320, text="Si la somme des dés du joueur",fill="gold",font="Limelight 13")
+    canva.create_text(200,370, text="est plus élevée que celle du croupier,",fill="gold",font="Limelight 13")
+    canva.create_text(200,420, text="il remporte le gain associé à sa mise.",fill="gold",font="Limelight 13")
+    canva.create_text(200,490, text="Sinon il perd sa mise.",fill="gold",font="Limelight 13")
+    canva.create_text(200,560, text="En cas d'égalité,",fill="gold",font="Limelight 13")
+    canva.create_text(200,610, text="le joueur récupère sa mise divisé par 2.",fill="gold",font="Limelight 13")
 
    
     # Création des tables
@@ -98,8 +107,8 @@ def creerFrameJeuDeDes(parent, fin_jeu, nom, solde, quitter):
 
 
     # Affichage des totaux
-    total_banque = canva.create_text(750,270,text=f"Total banque : {0}",fill='white',font=("Arial",20))
-    total_joueur = canva.create_text(750,480,text=f"Total : {0}",fill='white',font=("Arial",20))
+    total_banque = canva.create_text(750,270,text=f"Total banque : {0}",fill='gold',font="Limelight 19")
+    total_joueur = canva.create_text(750,480,text=f"Total : {0}",fill='gold',font="Limelight 19")
 
 
     # Création du bouton quitter
@@ -121,7 +130,7 @@ def creerFrameJeuDeDes(parent, fin_jeu, nom, solde, quitter):
     # Création bouton lancer les dés
 
     lancer = Button(canva,text="Lancer les dés",width=20,command=jouer)
-    lancer.place(x=100,y=400)
+    lancer.place(x=525,y=400)
         
 
 
@@ -130,14 +139,14 @@ def creerFrameJeuDeDes(parent, fin_jeu, nom, solde, quitter):
     
     liste_mise =[5,10,20,50,100,200,500,1000]
     mise = ttk.Combobox(canva,values=liste_mise,state="readonly")
-    mise.place(x=300,y=400) 
+    mise.place(x=800,y=400) 
     mise.current(0)   
     
 
 
     # Affichage gain total 
 
-    gain = canva.create_text(1300,350,text=f"Gain : {0}",fill='white',font=("Arial",20))
+    gain = canva.create_text(1300,350,text=f"Gain : {0}",fill='gold',font="Limelight 19")
 
 
 
