@@ -1,5 +1,9 @@
 from random import*
 
+selection = {"type": None, "valeur": None}    # Pour l'affichage de la sélection
+
+
+
 
 ordre_roulette = [0,32, 15, 19, 4, 21, 2, 25, 17, 34,6, 27, 13, 36, 11, 30, 8, 23, 10, 5,24, 16, 33, 1, 20, 14, 31, 9, 22, 18,29, 7, 28, 12, 35, 3, 26]
 
@@ -13,20 +17,20 @@ def creation_dic(ordre):
         numero = ordre[i]
         
         if numero == 0:
-            couleur = "vert"
+            couleur = "Vert"
         elif numero in rouge:
-            couleur = "rouge"
+            couleur = "Rouge"
         else:
-            couleur = "noir"
+            couleur = "Noir"
         
-        dic[i+1] = [numero, couleur]
+        dic[i+1] = [numero,couleur]
     
     return dic
 
 
 
 
-case_numero_et_couleur = creation_dic(ordre_roulette)  #  clé : psotion sur la roue / valeur : liste avec numero et la couleur[numero,couleur]
+case_numero_et_couleur = creation_dic(ordre_roulette)  #  clé : psotion sur la roue / valeur : liste avec numero et la couleur [numero,couleur]
 
 
 
@@ -90,6 +94,25 @@ def creation_chemin() :
         i+=1
     
     return chemin 
+
+
+
+
+
+def recup_gain(mise,selection,case) :
+    
+    if selection == "Pair" and case[0] % 2 == 0 :
+        return mise*2
+    elif selection == "Impair" and case[0] % 2 != 0 :
+        return mise*2
+    elif selection == case[1] :
+        return mise*2
+    elif case[0] == selection :
+        return mise*30
+    else :
+        return 0
+        
+
 
 
 
