@@ -22,33 +22,25 @@ cartes_dict = {
         "pique-8": 8, "pique-9": 9, "pique-10": 10, "pique-valet": 10, "pique-dame": 10, "pique-roi": 10, "pique-as": 11
         }       
 
-def score_joueur(carte_joueur):
+def calcul_score(liste_carte):
         somme = 0
-        for carte in carte_joueur:
+        nb_as = 0
+        for carte in liste_carte:
                 somme = somme + cartes_dict[carte]      #calcul de la somme
-
-        for carte in carte_joueur:      # as = 11 ou 1
+                
                 if carte[-2:] == "as":
-                        if somme > 21:
-                                somme = somme-10
-                        elif somme ==21:
-                                return somme
-                        else:
-                                return (somme, somme-10)
-        return somme
+                        nb_as += 1
 
+        if nb_as == 0:
+                return somme
+        
+        else:
+                while nb_as > 1:
+                        somme = somme - 10
+                        nb_as = nb_as - 1
 
-def score_croupier(carte_croupier):
-        somme = 0
-        for carte in carte_croupier:
-                somme = somme + cartes_dict[carte]      #calcul de la somme
-
-        for carte in carte_croupier:      # as = 11 ou 1
-                if carte[-2:] == "as":
-                        if somme > 21:
-                                somme = somme-10
-                        elif somme ==21:
-                                return somme
-                        else:
-                                return (somme, somme-10)
+                if somme > 21:
+                        somme = somme - 10
+                elif somme <= 21:
+                        return (somme, somme-10)
         return somme
