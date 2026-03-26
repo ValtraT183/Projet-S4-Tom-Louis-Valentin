@@ -27,7 +27,7 @@ def creerFrameMachineASous(fenetre, fin_jeu, nom, solde, quitter):
         canva.create_image(889,335,image=case2)
         canva.create_image(1017,335,image=case3)
 
-        canva.create_text(500,350,text=f"Gain : {recup_gain(n1,n2,n3,int(mise.get()))} VTL",font=("Arial",25),fill="white",tags="texte")
+        canva.create_text(900,135,text=f"Gain : {recup_gain(n1,n2,n3,int(mise.get()))} VTL",font="Limelight 28",fill="gold",tags="texte")
 
 
 
@@ -53,30 +53,30 @@ def creerFrameMachineASous(fenetre, fin_jeu, nom, solde, quitter):
 
     # Titre
 
-    canva.create_text(550,50,text="Machine à sous",fill='white',font=("Arial",40))
+    canva.create_text(220,50,text="Machine à sous",fill='firebrick',font="Rye 37")
 
 
     # Barème 
 
-    canva.create_text(100,150,text=f"Barème :",font=("Arial",20),fill="white")
+    canva.create_text(100,150,text=f"Barème :",font="Limelight 17",fill="gold")
 
     canva.valentin = PhotoImage(file="Image/valentin.png").subsample(15)
     canva.create_image(100,250,image=canva.valentin)
-    canva.create_text(210,250,text="x 3 > 1000 VTL",fill="white",font=("Arial,20"))
-    canva.create_text(210,275,text="x 2 > 500 VTL  ",fill="white",font=("Arial,20"))
+    canva.create_text(240,250,text="x 3 > 2.5 * Mise",fill="gold",font="Limelight 17")
+    canva.create_text(240,275,text="  x 2 > 1.25 * Mise",fill="gold",font="Limelight 17")
 
     canva.louis = PhotoImage(file="Image/louis.png").subsample(16)
     canva.create_image(100,400,image=canva.louis)
-    canva.create_text(205,400,text="x 3 > 500 VTL",fill="white",font=("Arial,20"))
-    canva.create_text(205,425,text="x 2 > 250 VTL",fill="white",font=("Arial,20"))
+    canva.create_text(240,400,text=" x 3 > 1.25 * Mise",fill="gold",font="Limelight 17")
+    canva.create_text(240,425,text="    x 2 > 0.625 * Mise",fill="gold",font="Limelight 17")
 
     canva.tom = PhotoImage(file="Image/tom.png").subsample(14)
     canva.create_image(100,550,image=canva.tom)
-    canva.create_text(205,550,text="x 3 > 100 VTL",fill="white",font=("Arial,20"))
-    canva.create_text(205,575,text="x 2 > 50 VTL  ",fill="white",font=("Arial,20"))
+    canva.create_text(240,550,text="   x 3 > 0.250 * Mise",fill="gold",font="Limelight 17")
+    canva.create_text(240,575,text="  x 2 > 0.125 * Mise",fill="gold",font="Limelight 17")
 
 
-    canva.create_line(350,0,350,750,width=2)
+    canva.create_line(425,0,425,750,width=2)
 
 
 
@@ -123,7 +123,7 @@ def creerFrameMachineASous(fenetre, fin_jeu, nom, solde, quitter):
 
     # Création du bouton quitter
 
-    quitter = Button(canva,text="Quitter",width=30,height=2, command=quitter)
+    quitter = Button(canva,text="Quitter",width=30,height=2, bg="red", command=quitter)
     quitter.place(x=1250,y=700)
 
    

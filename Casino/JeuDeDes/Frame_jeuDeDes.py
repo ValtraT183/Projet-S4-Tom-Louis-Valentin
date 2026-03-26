@@ -113,7 +113,7 @@ def creerFrameJeuDeDes(parent, fin_jeu, nom, solde, quitter):
 
     # Création du bouton quitter
 
-    quitter = Button(canva,text="Quitter",width=30,height=2, command=quitter)
+    quitter = Button (canva,text="Quitter",width=30,height=2, bg="red", command=quitter)
     quitter.place(x=1250,y=700)
         
 
