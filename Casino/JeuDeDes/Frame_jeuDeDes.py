@@ -149,6 +149,13 @@ def creerFrameJeuDeDes(parent, fin_jeu, nom, solde, quitter):
     gain = canva.create_text(1300,350,text=f"Gain : {0}",fill='gold',font="Limelight 19")
 
 
+    # Affichage du nom de l'utilisateur et du solde
+
+    canva.create_text(1350,50,text=f"Nom d'utilisateur : {nom}",font=("Arial",15),fill="white")
+
+    canva.create_text(1350,100,text=f"Solde : {solde} VTL",font=("Arial",15),fill="white")
+
+
 
 
 
@@ -157,3 +164,4 @@ def creerFrameJeuDeDes(parent, fin_jeu, nom, solde, quitter):
         "nom_uti": nom,
         "solde_uti": solde,
     }
+    
