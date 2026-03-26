@@ -2,7 +2,7 @@ from tkinter import*
 from tkinter import ttk
 from PIL import Image, ImageTk 
 from random import*
-from time import*
+
 from Casino.Roulette.Roulette_programme import *
 
 
@@ -15,7 +15,7 @@ from Casino.Roulette.Roulette_programme import *
 def creerFrameRoulette(fenetre, fin_jeu, nom, solde, quitter):
     
     def jouer() :
-        start_time = perf_counter()
+        
         
         def animation(coordonnees):
 
@@ -28,8 +28,6 @@ def creerFrameRoulette(fenetre, fin_jeu, nom, solde, quitter):
 
             def deplacer(i):
                 if i >= len(chemin):
-                    end_time= perf_counter()
-                    print(f"{end_time-start_time}s")
                     return
             
                 x = coordonnees[chemin[i]][0]
@@ -45,11 +43,47 @@ def creerFrameRoulette(fenetre, fin_jeu, nom, solde, quitter):
 
         animation(case_coordonnees)
         
-        
-        
-            
+
+    
+    
+    def afficher_selection() :
+        canva.delete("texte")
+        if selection["type"] == None :
+            texte = "Aucune sélection"
+        else :
+            texte = f"Votre sélection : {selection["valeur"]}"
+
+        canva.create_text(300,150,text=texte,font=("Arial",15),fill="white",tag="texte")
 
 
+
+    def pai():
+        selection["type"] = "Parité"
+        selection["valeur"] = "Pair"
+        afficher_selection()
+
+    def imp() :
+        selection["type"] = "Parité"
+        selection["valeur"] = "Impair"
+        afficher_selection()
+
+    def r():
+        selection["type"] = "Couleur"
+        selection["valeur"] = "Rouge"
+        afficher_selection()
+
+    def n():
+        selection["type"] = "Couleur"
+        selection["valeur"] = "Noir"
+        afficher_selection()
+    
+    def choix_numero(_):
+        selection["type"] = "Numéro"
+        selection["valeur"] = numero.get()
+        afficher_selection()
+
+    
+    
 
 
     #Création de la frame
@@ -112,29 +146,35 @@ def creerFrameRoulette(fenetre, fin_jeu, nom, solde, quitter):
     # Création menu déroulant pour sélectionner le numéro
     
     liste_numero =[i for i in range(37)]
-    mise = ttk.Combobox(canva,values=liste_numero,state="readonly")
-    mise.place(x=1250,y=400)    
-    canva.create_text(570,570,text="Mise :",font=("Arial",15),fill="white") 
-
+    numero = ttk.Combobox(canva,values=liste_numero,state="readonly")
+    numero.place(x=1250,y=400) 
+    numero.bind("<<ComboboxSelected>>", choix_numero)   
+    
 
         
-    # Création menu déroulant pour sélectionner la couleur
+    # Création boutons pour sélectionner la couleur
     
-    liste_numero =["Rouge","Noir"]
-    mise = ttk.Combobox(canva,values=liste_numero,state="readonly")
-    mise.place(x=1250,y=200)    
-    canva.create_text(570,570,text="Mise :",font=("Arial",15),fill="white") 
+    rouge = Button(canva,text="Rouge",width=10,height=2,command=r)
+    rouge.place(x=1200,y=150)
+    
+
+    noir = Button(canva,text="Noir",width=10,height=2,command=n)
+    noir.place(x=1200,y=300)
 
 
             
-    # Création menu déroulant pour sélectionner la parité
+    # Création boutons pour sélectionner la parité
+
+    pair = Button(canva,text="Pair",width=10,height=2,command=pai)
+    pair.place(x=1200,y=450)
+
+    impair = Button(canva,text="Impair",width=10,height=2,command=imp)
+    impair.place(x=1200,y=600)
+
+
+
+
     
-    liste_numero =["Pair","Impair"]
-    mise = ttk.Combobox(canva,values=liste_numero,state="readonly")
-    mise.place(x=1250,y=500)    
-    canva.create_text(570,570,text="Mise :",font=("Arial",15),fill="white") 
-
-
 
 
 
@@ -142,6 +182,9 @@ def creerFrameRoulette(fenetre, fin_jeu, nom, solde, quitter):
 
     lancer = Button(canva,text=f"Lancer la roue",width=35,height=2,command=jouer)
     lancer.place(x=775,y=580)
+
+
+    afficher_selection()  # Pour avoir le message : Aucune sélection
 
 
 
