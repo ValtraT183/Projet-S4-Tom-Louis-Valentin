@@ -8,9 +8,6 @@ from Casino.Roulette.Roulette_programme import *
 
 
 
-global indice_case_fin
-global case_fin     # liste 
-
 
 def creerFrameRoulette(fenetre, fin_jeu, nom, solde, quitter):
     
@@ -72,8 +69,10 @@ def creerFrameRoulette(fenetre, fin_jeu, nom, solde, quitter):
         canva.delete("texte")
         if selection["type"] == None :
             texte = "Aucune sélection"
+            lancer.config(state="disabled")
         else :
             texte = f"Votre sélection : {selection["valeur"]}"
+            lancer.config(state="active")
 
         canva.create_text(300,150,text=texte,font=("Arial",15),fill="white",tag="texte")
 
@@ -105,8 +104,7 @@ def creerFrameRoulette(fenetre, fin_jeu, nom, solde, quitter):
         afficher_selection()
 
     
-        
-
+  
 
     #Création de la frame
     frame_roulette = Frame(fenetre, height=750, width=1500)
@@ -193,41 +191,30 @@ def creerFrameRoulette(fenetre, fin_jeu, nom, solde, quitter):
     impair = Button(canva,text="Impair",width=10,height=2,command=imp)
     impair.place(x=1200,y=600)
 
-
-
-
-    
-
-
-
     # Création du bouton lancer
 
     lancer = Button(canva,text=f"Lancer la roue",width=35,height=2,command=jouer)
     lancer.place(x=775,y=580)
 
 
-    afficher_selection()  # Pour avoir le message : Aucune sélection
+    afficher_selection()  # Pour avoir le message : "Aucune sélection"
 
 
-
+   
     
 
-
-    
     # Création du boutton retour au menu 
 
     retour = Button(canva,text="Retour",width=30,height=2, command=fin_jeu)
     retour.place(x=1250,y=600)
 
 
-
-
-
-
     # Création du bouton quitter
 
     quitter = Button(canva,text="Quitter",width=30,height=2, command=quitter)
     quitter.place(x=1250,y=700)
+
+
 
 
     return {
