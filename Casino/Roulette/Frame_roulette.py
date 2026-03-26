@@ -8,31 +8,50 @@ from Casino.Roulette.Roulette_programme import *
 
 
 
-
-
+global indice_case_fin
+global case_fin     # liste 
 
 
 def creerFrameRoulette(fenetre, fin_jeu, nom, solde, quitter):
     
     def jouer() :
-        
+        canva.delete("texte")
         
         def animation(coordonnees):
-
+            
             canva.bille_img = PhotoImage(file="Image/bille.png").subsample(25)
             
             chemin = creation_chemin()
             xdebut = coordonnees[chemin[0]][0]
             ydebut = coordonnees[chemin[0]][1] 
             bille = canva.create_image(xdebut,ydebut,image=canva.bille_img)
-
+            afficher_selection()
+            lancer.config(state="disabled")
+            mise.config(state="disabled")
+            numero.config(state="disabled")
+            rouge.config(state="disabled")
+            noir.config(state="disabled")
+            pair.config(state="disabled")
+            impair.config(state="disabled")
+           
             def deplacer(i):
+                global derniere_case_affichee
                 if i >= len(chemin):
+                    gain = recup_gain(int(mise.get()), selection["valeur"], case_numero_et_couleur[derniere_case_affichee])
+                    canva.create_text(500,350,text=f"Gain : {gain} VTL",font=("Arial",25),fill="white",tags="texte")
+                    lancer.config(state="active")
+                    mise.config(state="active")
+                    numero.config(state="active")
+                    rouge.config(state="active")
+                    noir.config(state="active")
+                    pair.config(state="active")
+                    impair.config(state="active")
+                
                     return
             
                 x = coordonnees[chemin[i]][0]
                 y = coordonnees[chemin[i]][1]
-                
+                derniere_case_affichee = chemin[i]
                 canva.coords(bille, x, y)
                 
                 ecart = randint(1,3)
@@ -40,8 +59,11 @@ def creerFrameRoulette(fenetre, fin_jeu, nom, solde, quitter):
                 
                 
             deplacer(0)
-
+        
         animation(case_coordonnees)
+        
+        
+    
         
 
     
@@ -79,11 +101,11 @@ def creerFrameRoulette(fenetre, fin_jeu, nom, solde, quitter):
     
     def choix_numero(_):
         selection["type"] = "Numéro"
-        selection["valeur"] = numero.get()
+        selection["valeur"] = int(numero.get())
         afficher_selection()
 
     
-    
+        
 
 
     #Création de la frame

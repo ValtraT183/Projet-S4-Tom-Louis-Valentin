@@ -17,20 +17,20 @@ def creation_dic(ordre):
         numero = ordre[i]
         
         if numero == 0:
-            couleur = "vert"
+            couleur = "Vert"
         elif numero in rouge:
-            couleur = "rouge"
+            couleur = "Rouge"
         else:
-            couleur = "noir"
+            couleur = "Noir"
         
-        dic[i+1] = [numero, couleur]
+        dic[i+1] = [numero,couleur]
     
     return dic
 
 
 
 
-case_numero_et_couleur = creation_dic(ordre_roulette)  #  clé : psotion sur la roue / valeur : liste avec numero et la couleur[numero,couleur]
+case_numero_et_couleur = creation_dic(ordre_roulette)  #  clé : psotion sur la roue / valeur : liste avec numero et la couleur [numero,couleur]
 
 
 
@@ -94,6 +94,25 @@ def creation_chemin() :
         i+=1
     
     return chemin 
+
+
+
+
+
+def recup_gain(mise,selection,case) :
+    
+    if selection == "Pair" and case[0] % 2 == 0 :
+        return mise*2
+    elif selection == "Impair" and case[0] % 2 != 0 :
+        return mise*2
+    elif selection == case[1] :
+        return mise*2
+    elif case[0] == selection :
+        return mise*30
+    else :
+        return 0
+        
+
 
 
 
