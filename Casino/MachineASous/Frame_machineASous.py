@@ -102,7 +102,7 @@ def creerFrameMachineASous(fenetre, fin_jeu, nom, solde, quitter):
     mise = ttk.Combobox(canva,values=liste_mise,state="readonly")
     mise.place(x=500,y=590)    
     mise.current(0)
-    canva.create_text(570,570,text="Mise :",font=("Arial",15),fill="white")
+    canva.create_text(572,570,text="Mise :",font="Limelight 19",fill="gold")
     
 
 
