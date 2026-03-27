@@ -124,9 +124,9 @@ def creerFrameJeuDeDes(parent, fin_jeu, nom, solde, quitter):
 
     # Création du bouton quitter
 
-    quitter = Button (canva,text="Quitter",width=30,height=2, bg="red", command=quitter)
-    quitter.place(x=1250,y=700)
-
+    quitt = Button (canva,text="Quitter",width=30,height=2, bg="red", command=quitter)
+    quitt.place(x=1250,y=700)
+        
 
 
     # Création du boutton retour au menu 
@@ -155,6 +155,7 @@ def creerFrameJeuDeDes(parent, fin_jeu, nom, solde, quitter):
     mise = ttk.Combobox(canva,values=liste_mise,state="readonly")
     mise.place(x=800,y=400) 
     mise.current(0)   
+    canva.create_text(870,370,text="Mise :",font="Limelight 19",fill="gold")
     
 
 
