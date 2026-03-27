@@ -1,0 +1,40 @@
+Manquements/changements projet Casino VTL :
+
+
+
+
+Pour le Menu connexion :
+
+	- Mettre le bouton "se connecter" à la même taille que l'autre
+	- Replacer correctement et agrandir le bouton quitter (voir ce qui a été fait sur les autres pages)
+	- Mettre les champs de saisies à la même hauteur que les textes
+	- Voir pour décaler les boutons pour que ca s'ajuste correctement ? (suggestion : décaler vers la gauche)7
+
+Pour le Menu création de compte :
+
+	- Mettre les champs de saisies à la même hauteur que les textes
+	- Replacer correctement et agrandir le bouton quitter (voir ce qui a été fait sur les autres pages)
+	- Agrandir les boutons "Créer nouveau compte" et "J'ai déjà un compte" pour que ca soit de la même taille que ceux du Menu 		  connexion
+	- (suggestion : replacer la case à cocher pour les règles de confidentialités)
+
+
+
+Pour le Menu principal :
+
+	- Mettre bouton "Quitter" en rouge
+	- Combler le vide à gauche de la page
+
+
+Pour la Machine à sous :
+
+	- suggestion (Changer le barème pour ne plus avoir de nombre à virgule ou alors, accepter de pouvoir avoir un nombre décimal de 	   VTL)
+
+
+Pour la roulette : 
+	
+	- Faire entièrement la mise en page
+
+
+Pour le jeu de dés :
+
+	- Mettre une zone de texte pour indiquer où se trouve la mise
