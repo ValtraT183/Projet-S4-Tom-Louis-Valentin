@@ -14,6 +14,6 @@ def recup_gain(mise,tot_a,tot) :
                 return 0
         elif tot_a == tot :
                 return round(mise/2)
-        else :
+        else:
                 return round(mise*2)
         

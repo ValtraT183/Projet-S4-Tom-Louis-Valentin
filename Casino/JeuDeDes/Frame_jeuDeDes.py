@@ -9,6 +9,8 @@ from Casino.JeuDeDes.JeuDeDes_programme import recup_gain, recup_image
 
 def creerFrameJeuDeDes(parent, fin_jeu, nom, solde, quitter):
 
+    solde_joueur = int(solde)
+
     def jouer():
         global de1,de2,de3,de1a,de2a,de3a
         global n1,n2,n3,n1a,n2a,n3a
@@ -44,10 +46,19 @@ def creerFrameJeuDeDes(parent, fin_jeu, nom, solde, quitter):
         canva.itemconfig(total_joueur, text=f"Total : {tot_u}")
         canva.itemconfig(gain,text=f"Gain : {recup_gain(int(mise.get()),tot_b,tot_u)}")
         
+        return actualiser_gain(recup_gain(int(mise.get()),tot_b,tot_u), int(mise.get()))
+
+    def actualiser_gain(gain, mise):
+        nonlocal solde_joueur
+
+        if gain == 0:
+            solde_joueur = solde_joueur - mise
+        else:
+            solde_joueur = solde_joueur + gain
+        canva.delete("Solde")
+        canva.create_text(1350,100,text=f"Solde : {solde_joueur} VTL",font=("Arial",15),fill="white", tags="Solde")
 
 
-
- 
     
     #Création de la frame
 
@@ -115,7 +126,7 @@ def creerFrameJeuDeDes(parent, fin_jeu, nom, solde, quitter):
 
     quitter = Button (canva,text="Quitter",width=30,height=2, bg="red", command=quitter)
     quitter.place(x=1250,y=700)
-        
+
 
 
     # Création du boutton retour au menu 
@@ -124,7 +135,10 @@ def creerFrameJeuDeDes(parent, fin_jeu, nom, solde, quitter):
     retour.place(x=1250,y=600)
 
 
+    # Affichage du nom de l'utilisateur et du solde
 
+    canva.create_text(1350,50,text=f"Nom d'utilisateur : {nom}",font=("Arial",15),fill="white")
+    canva.create_text(1350,100,text=f"Solde : {solde_joueur} VTL",font=("Arial",15),fill="white", tags="Solde")
 
 
     # Création bouton lancer les dés
@@ -149,11 +163,8 @@ def creerFrameJeuDeDes(parent, fin_jeu, nom, solde, quitter):
     gain = canva.create_text(1300,350,text=f"Gain : {0}",fill='gold',font="Limelight 19")
 
 
-
-
-
     return {
         "frame": frame_jeu_de_des,
         "nom_uti": nom,
-        "solde_uti": solde,
+        "solde_uti": solde_joueur,
     }
