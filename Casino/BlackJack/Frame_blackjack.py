@@ -300,7 +300,11 @@ def creerFrameBlackjack(parent, fin_jeu, nom, solde, quitter):
     canva.create_line(950,500,950,650,fill="white",width="2")
 
    
+    # Affichage du nom de l'utilisateur et du solde
 
+    canva.create_text(1350,50,text=f"Nom d'utilisateur : {nom}",font=("Arial",15),fill="white")
+    canva.create_text(1350,100,text=f"Solde : {solde} VTL",font=("Arial",15),fill="white")
+    
 
     # Création du bouton quitter
 
