@@ -39,8 +39,8 @@ def creerFrameMenu(parent, retourner, nom_uti, solde_uti, quitter, creerMachineA
     retour = Button(canva, text="Se déconnecter", width=30, height=2, command=retourner)
     retour.place(x=1250, y=600)
 
-    quitter = Button(canva,text="Quitter",width=30,height=2, command=quitter)
-    quitter.place(x=1250,y=700)
+    quitt = Button(canva,text="Quitter",width=30,height=2,bg="red", command=quitter)
+    quitt.place(x=1250,y=700)
 
 
 
