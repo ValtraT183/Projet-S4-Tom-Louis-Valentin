@@ -85,16 +85,20 @@ def creerFrameJeuDeDes(parent, fin_jeu, nom, solde, quitter):
     canva.create_line(400,0,400,750,fill="black",width=2)
 
     # Affichage des règles
-    canva.create_text(200,200, text="Le joueur donne une mise puis lance 3 dés.",fill="gold",font="Limelight 13")
-    canva.create_text(200,250, text="Le croupier fait de même.",fill="gold",font="Limelight 13")
-    canva.create_text(200,320, text="Si la somme des dés du joueur",fill="gold",font="Limelight 13")
-    canva.create_text(200,370, text="est plus élevée que celle du croupier,",fill="gold",font="Limelight 13")
-    canva.create_text(200,420, text="il remporte le gain associé à sa mise.",fill="gold",font="Limelight 13")
-    canva.create_text(200,490, text="Sinon il perd sa mise.",fill="gold",font="Limelight 13")
-    canva.create_text(200,560, text="En cas d'égalité,",fill="gold",font="Limelight 13")
-    canva.create_text(200,610, text="le joueur récupère sa mise divisé par 2.",fill="gold",font="Limelight 13")
 
-   
+    canva.create_text(200,140, text="Le joueur donne une mise puis lance 3 dés.", fill="gold", font="Limelight 13")
+    canva.create_text(200,180, text="Le croupier fait de même.", fill="gold", font="Limelight 13")
+
+    canva.create_text(200,270, text="Si la somme des dés du joueur", fill="gold", font="Limelight 13")
+    canva.create_text(200,310, text="est plus élevée que celle du croupier,", fill="gold", font="Limelight 13")
+
+    canva.create_text(200,400, text="il remporte le gain associé à sa mise.", fill="gold", font="Limelight 13")
+
+    canva.create_text(200,490, text="Sinon il perd sa mise.", fill="gold", font="Limelight 13")
+
+    canva.create_text(200,580, text="En cas d'égalité,", fill="gold", font="Limelight 13")
+    canva.create_text(200,620, text="le joueur récupère sa mise divisée par 2.", fill="gold", font="Limelight 13")
+    
     # Création des tables
 
 
