@@ -42,6 +42,7 @@ def creerFrameCreerCompte(parent, retourner, valider_nouveau_compte, quitter):
 
     
 # case à cocher pour les règles de confidentialité 
+
     etat = BooleanVar()
     politique = Checkbutton(frame_creercompte, text="Veuillez accepter nos règles de confidentialité", variable=etat, font=("Arial 10"))
     politique.place(x=800, y=500)

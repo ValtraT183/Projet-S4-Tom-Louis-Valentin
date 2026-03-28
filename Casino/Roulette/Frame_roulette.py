@@ -35,7 +35,7 @@ def creerFrameRoulette(fenetre, fin_jeu, nom, solde, quitter):
                 global derniere_case_affichee
                 if i >= len(chemin):
                     gain = recup_gain(int(mise.get()), selection["valeur"], case_numero_et_couleur[derniere_case_affichee])
-                    canva.create_text(500,350,text=f"Gain : {gain} VTL",font=("Arial",25),fill="white",tags="texte")
+                    canva.create_text(900,100,text=f"Gain : {gain} VTL",font="Limelight 24",fill="gold",tags="texte")
                     lancer.config(state="active")
                     mise.config(state="active")
                     numero.config(state="active")
@@ -74,7 +74,7 @@ def creerFrameRoulette(fenetre, fin_jeu, nom, solde, quitter):
             texte = f"Votre sélection : {selection["valeur"]}"
             lancer.config(state="active")
 
-        canva.create_text(300,150,text=texte,font=("Arial",15),fill="white",tag="texte")
+        canva.create_text(200,725,text=texte,font="Limelight 17",fill="gold",tag="texte")
 
 
 
@@ -127,21 +127,78 @@ def creerFrameRoulette(fenetre, fin_jeu, nom, solde, quitter):
 
     # Titre
 
-    canva.create_text(550,50,text="Roulette",fill='white',font=("Arial",40))
-
-
-    # Barème 
-
-    canva.create_text(100,150,text=f"Barème :",font=("Arial",20),fill="white")
-    canva.create_line(350,0,350,750,width=2)
+    canva.create_text(220,50,text="Roulette",fill='firebrick',font="Rye 37")
+    canva.create_line(425,0,425,750,width=2)
+    canva.create_line(0,375,425,375,width=2)
 
 
 
+
+# ---------------------------------Affichage des règles------------------------------------------------
+
+    canva.create_text(215,130, text="Le joueur choisit un pari et une mise.",fill="gold",font="Limelight 13")
+    canva.create_text(215,180, text="La bille est lancée dans la roulette.",fill="gold",font="Limelight 13")
+    canva.create_text(215,230, text="Si le résultat correspond à son choix,",fill="gold",font="Limelight 13")
+    canva.create_text(215,260, text="il gagne selon le barème.",fill="gold",font="Limelight 13")
+    canva.create_text(215,310, text="Sinon, il perd sa mise.",fill="gold",font="Limelight 13")
+
+
+# -----------------------------------------------------------------------------------------------------
+    
+
+
+
+
+
+
+# --------------------------------------Sélection------------------------------------------------------
+
+    canva.create_text(100,425,text=f"Couleur :",font="Limelight 17",fill="gold")
+    canva.create_text(100,450, text="(x2)",fill="gold",font="Limelight 13")
+
+    canva.create_text(100,525,text=f"Parité :",font="Limelight 17",fill="gold")
+    canva.create_text(100,550, text="(x2)",fill="gold",font="Limelight 13")
+
+    canva.create_text(100,625,text=f"Numéro :",font="Limelight 17",fill="gold")
+    canva.create_text(100,650, text="(x30)",fill="gold",font="Limelight 13")
+
+   
+    # Création menu déroulant pour sélectionner le numéro
+    
+    liste_numero =[i for i in range(37)]
+    numero = ttk.Combobox(canva,values=liste_numero,state="readonly",width=26)
+    numero.place(x=200,y=615) 
+    numero.bind("<<ComboboxSelected>>", choix_numero)   
+    
+
+        
+    # Création boutons pour sélectionner la couleur
+    
+    rouge = Button(canva,text="Rouge",width=10,height=2,command=r)
+    rouge.place(x=200,y=405)
+    
+
+    noir = Button(canva,text="Noir",width=10,height=2,command=n)
+    noir.place(x=300,y=405)
+
+
+            
+    # Création boutons pour sélectionner la parité
+
+    pair = Button(canva,text="Pair",width=10,height=2,command=pai)
+    pair.place(x=200,y=505)
+
+    impair = Button(canva,text="Impair",width=10,height=2,command=imp)
+    impair.place(x=300,y=505)
+
+
+# -----------------------------------------------------------------------------------------------------
 
     # Création de la roulette
 
     canva.machine = PhotoImage(file = "Image/roulette.png")
     canva.create_image(900,350,image=canva.machine)
+
 
 
     # Affichage du nom de l'utilisateur et du solde
@@ -159,38 +216,10 @@ def creerFrameRoulette(fenetre, fin_jeu, nom, solde, quitter):
     mise = ttk.Combobox(canva,values=liste_mise,state="readonly")
     mise.place(x=500,y=590)    
     mise.current(0)
-    canva.create_text(570,570,text="Mise :",font=("Arial",15),fill="white") 
+    canva.create_text(570,570,text="Mise :",font="Limelight 17",fill="gold") 
     
 
-    
-    # Création menu déroulant pour sélectionner le numéro
-    
-    liste_numero =[i for i in range(37)]
-    numero = ttk.Combobox(canva,values=liste_numero,state="readonly")
-    numero.place(x=1250,y=400) 
-    numero.bind("<<ComboboxSelected>>", choix_numero)   
-    
-
-        
-    # Création boutons pour sélectionner la couleur
-    
-    rouge = Button(canva,text="Rouge",width=10,height=2,command=r)
-    rouge.place(x=1200,y=150)
-    
-
-    noir = Button(canva,text="Noir",width=10,height=2,command=n)
-    noir.place(x=1200,y=300)
-
-
-            
-    # Création boutons pour sélectionner la parité
-
-    pair = Button(canva,text="Pair",width=10,height=2,command=pai)
-    pair.place(x=1200,y=450)
-
-    impair = Button(canva,text="Impair",width=10,height=2,command=imp)
-    impair.place(x=1200,y=600)
-
+ 
     # Création du bouton lancer
 
     lancer = Button(canva,text=f"Lancer la roue",width=35,height=2,command=jouer)
@@ -211,7 +240,7 @@ def creerFrameRoulette(fenetre, fin_jeu, nom, solde, quitter):
 
     # Création du bouton quitter
 
-    quitter = Button(canva,text="Quitter",width=30,height=2, command=quitter)
+    quitter = Button(canva,text="Quitter",width=30,height=2,bg="red", command=quitter)
     quitter.place(x=1250,y=700)
 
 
