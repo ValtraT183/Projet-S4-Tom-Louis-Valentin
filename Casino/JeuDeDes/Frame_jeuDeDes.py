@@ -51,15 +51,11 @@ def creerFrameJeuDeDes(parent, fin_jeu, nom, solde, quitter):
     def actualiser_gain(gain, mise):
         nonlocal solde_joueur
 
-        if gain == 0:
-            solde_joueur = solde_joueur - mise
-        else:
-            solde_joueur = solde_joueur + gain
+        solde_joueur += gain - mise 
+
         canva.delete("Solde")
         canva.create_text(1350,100,text=f"Solde : {solde_joueur} VTL",font=("Arial",15),fill="white", tags="Solde")
-
-
-    
+        
     #Création de la frame
 
     frame_jeu_de_des = Frame(parent, height=750, width=1500)

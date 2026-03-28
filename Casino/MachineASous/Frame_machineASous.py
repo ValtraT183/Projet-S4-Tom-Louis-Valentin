@@ -12,13 +12,14 @@ from Casino.MachineASous.MachineASous_programme import recup_gain, recup_image
 
 def creerFrameMachineASous(fenetre, fin_jeu, nom, solde, quitter):
     
+ 
     def jouer():
         canva.delete("texte")
         global case1,case2,case3
 
-        n1 = randint(1,3)
-        n2 =randint(1,3)
-        n3 =randint(1,3)
+        n1 = randint(1,4)
+        n2 =randint(1,4)
+        n3 =randint(1,4)
         case1 = recup_image(n1)
         case2 = recup_image(n2)
         case3 = recup_image(n3)
@@ -28,9 +29,8 @@ def creerFrameMachineASous(fenetre, fin_jeu, nom, solde, quitter):
         canva.create_image(1017,335,image=case3)
 
         canva.create_text(900,135,text=f"Gain : {recup_gain(n1,n2,n3,int(mise.get()))} VTL",font="Limelight 28",fill="gold",tags="texte")
-
-
-
+        
+       
 
     #Création de la frame
     frame_machine_a_sous = Frame(fenetre, height=750, width=1500)
@@ -62,18 +62,18 @@ def creerFrameMachineASous(fenetre, fin_jeu, nom, solde, quitter):
 
     canva.valentin = PhotoImage(file="Image/valentin.png").subsample(15)
     canva.create_image(100,250,image=canva.valentin)
-    canva.create_text(240,250,text="x 3 > 2.5 * Mise",fill="gold",font="Limelight 17")
-    canva.create_text(240,275,text="  x 2 > 1.25 * Mise",fill="gold",font="Limelight 17")
+    canva.create_text(240,250,text="x 3 > 5*Mise",fill="gold",font="Limelight 17")
+    canva.create_text(240,275,text="  x 2 > 2*Mise",fill="gold",font="Limelight 17")
 
     canva.louis = PhotoImage(file="Image/louis.png").subsample(16)
     canva.create_image(100,400,image=canva.louis)
-    canva.create_text(240,400,text=" x 3 > 1.25 * Mise",fill="gold",font="Limelight 17")
-    canva.create_text(240,425,text="    x 2 > 0.625 * Mise",fill="gold",font="Limelight 17")
+    canva.create_text(240,400,text=" x 3 > 3*Mise",fill="gold",font="Limelight 17")
+    canva.create_text(240,425,text="    x 2 > 2*Mise",fill="gold",font="Limelight 17")
 
     canva.tom = PhotoImage(file="Image/tom.png").subsample(14)
     canva.create_image(100,550,image=canva.tom)
-    canva.create_text(240,550,text="   x 3 > 0.250 * Mise",fill="gold",font="Limelight 17")
-    canva.create_text(240,575,text="  x 2 > 0.125 * Mise",fill="gold",font="Limelight 17")
+    canva.create_text(240,550,text="   x 3 > 2*Mise",fill="gold",font="Limelight 17")
+    canva.create_text(240,575,text="  x 2 > 1*Mise",fill="gold",font="Limelight 17")
 
 
     canva.create_line(425,0,425,750,width=2)
