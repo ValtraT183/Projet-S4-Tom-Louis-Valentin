@@ -3,6 +3,7 @@ from PIL import Image, ImageTk
 
 def creerFrameMenu(parent, retourner, nom_uti, solde_uti, quitter, creerMachineASous, creerJeuDeDes, creerBlackjack, creerRoulette):
 
+
     # Création de la frame
     frame_menu = Frame(parent, width=1500, height=750)
 
@@ -53,7 +54,7 @@ def creerFrameMenu(parent, retourner, nom_uti, solde_uti, quitter, creerMachineA
     return{
         "frame": frame_menu,
         "nom": nom_uti,
-        "mdp": solde_uti
+        "solde_uti": solde_uti
     }
 
 

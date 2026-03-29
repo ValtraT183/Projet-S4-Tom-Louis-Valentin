@@ -41,38 +41,45 @@ fenetre.title("Casino")
 fenetre.geometry("1500x750")
 
 
+#Récupérer le solde après chaque actualisation du txt
+def recup_solde(nom):
+    with open("Compte.txt", "r", encoding="utf-8") as compte:
+        lignes=compte.readlines()
+        for el in lignes:
+            joueur = el.strip()
+            joueur = joueur.split("/")
+            if joueur[0] == nom:
+                return int(joueur[2])
 
 # Frames Jeux
-def fin_jeu_JeuDeDes():
-    global frame_jeu_de_des
-    global frame_menu
 
-    frame_jeu_de_des["frame"].pack_forget()
+def jeuToMenu(frame_jeu):
+    global frame_menu
+    global nom_uti
+
+    nouveau_solde = recup_solde(nom_uti)
+
+    frame_menu = creerFrameMenu(fenetre, menuToConnexion, nom_uti, nouveau_solde, fenetre.destroy, creerMachineASous, creerJeuDeDes, creerBlackjack, creerRoulette) #recréer menu avec nouveau solde
+    frame_jeu["frame"].pack_forget()
     frame_menu["frame"].pack(fill="both", expand=True)
 
+
+def fin_jeu_JeuDeDes():
+    global frame_jeu_de_des
+    jeuToMenu(frame_jeu_de_des)
 
 def fin_jeu_MachineAsous():
     global frame_machine_a_sous
-    global frame_menu
-
-    frame_machine_a_sous["frame"].pack_forget()
-    frame_menu["frame"].pack(fill="both", expand=True)
-
+    jeuToMenu(frame_machine_a_sous)
 
 def fin_jeu_Blackjack():
     global frame_blackjack
-    global frame_menu
-
-    frame_blackjack["frame"].pack_forget()
-    frame_menu["frame"].pack(fill="both", expand=True)
-
+    jeuToMenu(frame_blackjack)
 
 def fin_jeu_Roulette():
     global frame_roulette
-    global frame_menu
+    jeuToMenu(frame_roulette)
 
-    frame_roulette["frame"].pack_forget()
-    frame_menu["frame"].pack(fill="both", expand=True)
 
 
 # Afficher les jeux
@@ -82,7 +89,9 @@ def creerMachineASous():
     global frame_menu
     global frame_machine_a_sous
 
-    frame_machine_a_sous = creerFrameMachineASous(fenetre, fin_jeu_MachineAsous, nom_uti, solde_uti, fenetre.destroy)
+    nouveau_solde = recup_solde(nom_uti)
+
+    frame_machine_a_sous = creerFrameMachineASous(fenetre, fin_jeu_MachineAsous, nom_uti, nouveau_solde, fenetre.destroy)
 
     frame_menu["frame"].pack_forget()
     frame_machine_a_sous["frame"].pack(fill="both", expand=True) #échange des frames => retour menu machine à sous à menu casino
@@ -91,8 +100,9 @@ def creerMachineASous():
 def creerJeuDeDes():
     global frame_menu
     global frame_jeu_de_des
+    nouveau_solde = recup_solde(nom_uti)
 
-    frame_jeu_de_des = creerFrameJeuDeDes(fenetre, fin_jeu_JeuDeDes, nom_uti, solde_uti, fenetre.destroy)
+    frame_jeu_de_des = creerFrameJeuDeDes(fenetre, fin_jeu_JeuDeDes, nom_uti, nouveau_solde, fenetre.destroy)
 
     frame_menu["frame"].pack_forget()
     frame_jeu_de_des["frame"].pack(fill="both", expand=True) #échange des frames => retour menu jeu de dés à menu casino
@@ -101,8 +111,9 @@ def creerJeuDeDes():
 def creerBlackjack():
     global frame_menu
     global frame_blackjack
+    nouveau_solde = recup_solde(nom_uti)
 
-    frame_blackjack = creerFrameBlackjack(fenetre, fin_jeu_Blackjack, nom_uti, solde_uti, fenetre.destroy)
+    frame_blackjack = creerFrameBlackjack(fenetre, fin_jeu_Blackjack, nom_uti, nouveau_solde, fenetre.destroy)
 
     frame_menu["frame"].pack_forget()
     frame_blackjack["frame"].pack(fill="both", expand=True) #échange des frames => retour menu jeu de dés à menu casino
@@ -111,8 +122,9 @@ def creerBlackjack():
 def creerRoulette():
     global frame_menu
     global frame_roulette
+    nouveau_solde = recup_solde(nom_uti)
 
-    frame_roulette = creerFrameRoulette(fenetre, fin_jeu_Roulette, nom_uti, solde_uti, fenetre.destroy)
+    frame_roulette = creerFrameRoulette(fenetre, fin_jeu_Roulette, nom_uti, nouveau_solde, fenetre.destroy)
 
     frame_menu["frame"].pack_forget()
     frame_roulette["frame"].pack(fill="both", expand=True) #échange des frames => retour menu machine à sous à menu casino

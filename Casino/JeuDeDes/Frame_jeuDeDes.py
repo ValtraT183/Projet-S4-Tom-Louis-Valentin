@@ -6,7 +6,6 @@ from Casino.JeuDeDes.JeuDeDes_programme import recup_gain, recup_image
 
 
 
-
 def creerFrameJeuDeDes(parent, fin_jeu, nom, solde, quitter):
 
     solde_joueur = int(solde)
@@ -51,13 +50,30 @@ def creerFrameJeuDeDes(parent, fin_jeu, nom, solde, quitter):
     def actualiser_gain(gain, mise):
         nonlocal solde_joueur
 
-        if gain == 0:
-            solde_joueur = solde_joueur - mise
-        else:
-            solde_joueur = solde_joueur + gain
+        solde_joueur = solde_joueur - mise + gain
         canva.delete("Solde")
         canva.create_text(1350,100,text=f"Solde : {solde_joueur} VTL",font=("Arial",15),fill="white", tags="Solde")
 
+        actualiser_gain_txt(solde_joueur, nom)
+
+    # Fonction actualiser le solde dans le txt
+
+    def actualiser_gain_txt(nouveau_solde, nom):
+        global solde_courant
+        solde_courant = nouveau_solde
+        lignes=[]
+
+        with open("Compte.txt","r",encoding="utf-8") as compte:
+            lignes=compte.readlines()
+
+            for el in lignes:
+                joueur = el.strip()
+                joueur = joueur.split("/")
+                if joueur[0] == nom:
+                    lignes[lignes.index(el)] = f"{joueur[0]}/{joueur[1]}/{nouveau_solde}\n"
+
+        with open("Compte.txt", "w", encoding="utf-8") as fichier:
+            fichier.writelines(lignes)    
 
     
     #Création de la frame
