@@ -11,9 +11,14 @@ from Casino.Roulette.Roulette_programme import *
 
 def creerFrameRoulette(fenetre, fin_jeu, nom, solde, quitter):
     
+    solde_joueur = int(solde)
+
+
     def jouer() :
         canva.delete("texte")
-        
+        canva.delete("Solde")
+        canva.create_text(1350,100,text=f"Solde : {solde_joueur - int(mise.get())} VTL",font=("Arial",15),fill="white",tags="Solde")
+
         def animation(coordonnees):
             
             canva.bille_img = PhotoImage(file="Image/bille.png").subsample(25)
@@ -44,7 +49,7 @@ def creerFrameRoulette(fenetre, fin_jeu, nom, solde, quitter):
                     pair.config(state="active")
                     impair.config(state="active")
                 
-                    return
+                    return actualiser_gain(gain, int(mise.get()))
             
                 x = coordonnees[chemin[i]][0]
                 y = coordonnees[chemin[i]][1]
@@ -58,7 +63,36 @@ def creerFrameRoulette(fenetre, fin_jeu, nom, solde, quitter):
             deplacer(0)
         
         animation(case_coordonnees)
+
         
+    # Fonction actualiser le solde du joueur dans la frame
+    def actualiser_gain(gain, mise):
+        nonlocal solde_joueur
+
+        solde_joueur = solde_joueur - mise + gain
+        canva.delete("Solde")
+        canva.create_text(1350,100,text=f"Solde : {solde_joueur} VTL",font=("Arial",15),fill="white", tags="Solde")
+
+        actualiser_gain_txt(solde_joueur, nom)
+
+    # Fonction actualiser le solde dans le txt
+
+    def actualiser_gain_txt(nouveau_solde, nom):
+        global solde_courant
+        solde_courant = nouveau_solde
+        lignes=[]
+
+        with open("Compte.txt","r",encoding="utf-8") as compte:
+            lignes=compte.readlines()
+
+            for el in lignes:
+                joueur = el.strip()
+                joueur = joueur.split("/")
+                if joueur[0] == nom:
+                    lignes[lignes.index(el)] = f"{joueur[0]}/{joueur[1]}/{nouveau_solde}\n"
+
+        with open("Compte.txt", "w", encoding="utf-8") as fichier:
+            fichier.writelines(lignes) 
         
     
         
@@ -205,7 +239,7 @@ def creerFrameRoulette(fenetre, fin_jeu, nom, solde, quitter):
 
     canva.create_text(1350,50,text=f"Nom d'utilisateur : {nom}",font=("Arial",15),fill="white")
 
-    canva.create_text(1350,100,text=f"Solde : {solde} VTL",font=("Arial",15),fill="white")
+    canva.create_text(1350,100,text=f"Solde : {solde} VTL",font=("Arial",15),fill="white", tags="Solde")
 
 
 
