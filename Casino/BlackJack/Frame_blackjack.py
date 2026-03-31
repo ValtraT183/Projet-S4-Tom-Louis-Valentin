@@ -8,13 +8,16 @@ from time import*
 
 
 def creerFrameBlackjack(parent, fin_jeu, nom, solde, quitter):
-
+    solde_joueur = int(solde)
 
     def commencer_partie():
         global carte_croupier
         global carte_joueur
         global croupier_cache
 
+        canva.delete("Solde")
+        canva.create_text(1350,100,text=f"Solde : {solde_joueur - int(mise.get())} VTL",font=("Arial",15),fill="white",tags="Solde")
+        canva.delete("texte")
         commencer.config(state = DISABLED)
         bouton_tirer.config(state=ACTIVE)
         bouton_rester.config(state=ACTIVE)
@@ -37,29 +40,22 @@ def creerFrameBlackjack(parent, fin_jeu, nom, solde, quitter):
         score_j = calcul_score(carte_joueur)
         score_c = calcul_score(carte_croupier)
 
-        # Gestion des tuples
         if type(score_j) == tuple:
             score_j = max(score_j)
         if type(score_c) == tuple:
             score_c = max(score_c)
 
-        # Blackjack des deux côtés : égalité
-        if score_j == 21 and score_c == 21:
+        if score_j == 21 and score_c == 21: #égalité
             if len(carte_joueur) == 2 and len(carte_croupier) == 2:
-                canva.create_text(750,375,text="Blackjack des deux côtés : égalité", tags="resultat")
-                return actualiser_gain(2)
+                return afficher_gain(2)
                  
 
-        # Blackjack joueur
-        if score_j == 21 and len(carte_joueur) == 2:
-            canva.create_text(750,375,text="Blackjack !! Vous avez gagné", tags="resultat")
-            return actualiser_gain(1)
+        if score_j == 21 and len(carte_joueur) == 2: #blackjack joueur
+            return afficher_gain(3)
 
 
-        # Blackjack croupier
-        if score_c == 21 and len(carte_croupier) == 2:
-            canva.create_text(750,375,text="Blackjack !! Le croupier a gagné", tags="resultat")
-            return actualiser_gain(0)
+        if score_c == 21 and len(carte_croupier) == 2:#blackjack croupier
+            return afficher_gain(0)
 
 
 
@@ -115,15 +111,13 @@ def creerFrameBlackjack(parent, fin_jeu, nom, solde, quitter):
 
         if croupier_ou_joueur == "croupier":
             if score > 21:
-                canva.create_text(750,375,text="Le croupier a dépassé 21, vous avez gagné", tags="resultat")
-                return actualiser_gain(1)
+                return afficher_gain(1)
             else:
                 return verif_score()
             
         else:
             if score > 21:
-                canva.create_text(750,375,text="Vous a dépassé 21, perdu", tags="resultat")
-                return actualiser_gain(0)
+                return afficher_gain(0)
 
             elif score == 21:
                 return rester() #Si 21 avec + de 2 cartes, on reste
@@ -145,29 +139,59 @@ def creerFrameBlackjack(parent, fin_jeu, nom, solde, quitter):
             score_j = max(score_j)
         
         if score_c > score_j:
-            canva.create_text(750,375,text = "Vous avez perdu", tags="resultat")
-            return actualiser_gain(0)   #le joueur a perdu
+            return afficher_gain(0)   #le joueur a perdu
         elif score_c == score_j:
-            canva.create_text(750,375,text = "égalité", tags="resultat")
-            return actualiser_gain(2)   # égalité
+            return afficher_gain(2)   # égalité
         else:
-            canva.create_text(750,375,text = "Vous avez gagné", tags="resultat")
-            return actualiser_gain(1)   # le joueur a gagné
+            return afficher_gain(1)   # le joueur a gagné
         
 
 
-    def actualiser_gain(win):
+    def afficher_gain(win):
         """
         win = 0 --> le joueur a perdu
         win = 1 --> le joueur a gagné
         win = 2 --> égalité
+        win = 3 --> Blackjack
         """
+        gain = recup_gain(int(mise.get()), win)
+        canva.create_text(750,425,text=f"Gain : {gain} VTL",font="Limelight 24",fill="gold",tags="texte")
+        if win == 3:
+            canva.create_text(800,400, text="BLACKJACK", font="Limelight 24", fill = "gold", tags="texte")
         bouton_tirer.config(state=DISABLED)
         bouton_rester.config(state=DISABLED)
+        actualiser_solde(gain,int(mise.get()))
+
+
+    def actualiser_solde(gain, mise):
+        nonlocal solde_joueur
+
+        solde_joueur = solde_joueur - mise + gain
+        canva.delete("Solde")
+        canva.create_text(1350,100,text=f"Solde : {solde_joueur} VTL",font=("Arial",15),fill="white", tags="Solde")
+
+        actualiser_solde_txt(solde_joueur, nom)
+
+    # Fonction actualiser le solde dans le txt
+
+    def actualiser_solde_txt(nouveau_solde, nom):
+        global solde_courant
+        solde_courant = nouveau_solde
+        lignes=[]
+
+        with open("Compte.txt","r",encoding="utf-8") as compte:
+            lignes=compte.readlines()
+
+            for el in lignes:
+                joueur = el.strip()
+                joueur = joueur.split("/")
+                if joueur[0] == nom:
+                    lignes[lignes.index(el)] = f"{joueur[0]}/{joueur[1]}/{nouveau_solde}\n"
+
+        with open("Compte.txt", "w", encoding="utf-8") as fichier:
+            fichier.writelines(lignes) 
+        
         canva.after(2000, reset)
-
-        #Faire logique gain
-
 
 
     def reset():
@@ -303,7 +327,7 @@ def creerFrameBlackjack(parent, fin_jeu, nom, solde, quitter):
     # Affichage du nom de l'utilisateur et du solde
 
     canva.create_text(1350,50,text=f"Nom d'utilisateur : {nom}",font=("Arial",15),fill="white")
-    canva.create_text(1350,100,text=f"Solde : {solde} VTL",font=("Arial",15),fill="white")
+    canva.create_text(1350,100,text=f"Solde : {solde} VTL",font=("Arial",15),fill="white", tags = "Solde")
     
 
     # Création du bouton quitter
@@ -340,14 +364,8 @@ def creerFrameBlackjack(parent, fin_jeu, nom, solde, quitter):
     
     liste_mise =[5,10,20,50,100,200,500,1000]
     mise = ttk.Combobox(canva,values=liste_mise,state="readonly")
+    mise.current(0)
     mise.place(x=300,y=400)    
-    
-
-
-    # Affichage gain total 
-
-    gain = canva.create_text(1300,350,text=f"Gain : {0}",fill='white',font=("Arial",20))
-
 
 
     return {

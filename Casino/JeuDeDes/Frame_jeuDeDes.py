@@ -45,20 +45,20 @@ def creerFrameJeuDeDes(parent, fin_jeu, nom, solde, quitter):
         canva.itemconfig(total_joueur, text=f"Total : {tot_u}")
         canva.itemconfig(gain,text=f"Gain : {recup_gain(int(mise.get()),tot_b,tot_u)}")
         
-        return actualiser_gain(recup_gain(int(mise.get()),tot_b,tot_u), int(mise.get()))
+        return actualiser_solde(recup_gain(int(mise.get()),tot_b,tot_u), int(mise.get()))
 
-    def actualiser_gain(gain, mise):
+    def actualiser_solde(gain, mise):
         nonlocal solde_joueur
 
         solde_joueur = solde_joueur - mise + gain
         canva.delete("Solde")
         canva.create_text(1350,100,text=f"Solde : {solde_joueur} VTL",font=("Arial",15),fill="white", tags="Solde")
 
-        actualiser_gain_txt(solde_joueur, nom)
+        actualiser_solde_txt(solde_joueur, nom)
 
     # Fonction actualiser le solde dans le txt
 
-    def actualiser_gain_txt(nouveau_solde, nom):
+    def actualiser_solde_txt(nouveau_solde, nom):
         global solde_courant
         solde_courant = nouveau_solde
         lignes=[]

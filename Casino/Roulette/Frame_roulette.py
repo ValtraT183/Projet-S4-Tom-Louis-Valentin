@@ -49,7 +49,7 @@ def creerFrameRoulette(fenetre, fin_jeu, nom, solde, quitter):
                     pair.config(state="active")
                     impair.config(state="active")
                 
-                    return actualiser_gain(gain, int(mise.get()))
+                    return actualiser_solde(gain, int(mise.get()))
             
                 x = coordonnees[chemin[i]][0]
                 y = coordonnees[chemin[i]][1]
@@ -66,18 +66,18 @@ def creerFrameRoulette(fenetre, fin_jeu, nom, solde, quitter):
 
         
     # Fonction actualiser le solde du joueur dans la frame
-    def actualiser_gain(gain, mise):
+    def actualiser_solde(gain, mise):
         nonlocal solde_joueur
 
         solde_joueur = solde_joueur - mise + gain
         canva.delete("Solde")
         canva.create_text(1350,100,text=f"Solde : {solde_joueur} VTL",font=("Arial",15),fill="white", tags="Solde")
 
-        actualiser_gain_txt(solde_joueur, nom)
+        actualiser_solde_txt(solde_joueur, nom)
 
     # Fonction actualiser le solde dans le txt
 
-    def actualiser_gain_txt(nouveau_solde, nom):
+    def actualiser_solde_txt(nouveau_solde, nom):
         global solde_courant
         solde_courant = nouveau_solde
         lignes=[]
