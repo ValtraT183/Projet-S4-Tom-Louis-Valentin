@@ -89,20 +89,29 @@ def creerFrameMachineASous(fenetre, fin_jeu, nom, solde, quitter):
 
     canva.create_text(100,150,text=f"Barème :",font="Limelight 17",fill="gold")
 
-    canva.valentin = PhotoImage(file="Image/valentin.png").subsample(15)
-    canva.create_image(100,250,image=canva.valentin)
-    canva.create_text(240,250,text="x 3 > 5*Mise",fill="gold",font="Limelight 17")
-    canva.create_text(240,275,text="  x 2 > 2*Mise",fill="gold",font="Limelight 17")
+    img_valentin = Image.open("Image/valentin.png")
+    img_valentin = img_valentin.resize((100,125))
+    canva.photo_valentin = ImageTk.PhotoImage(img_valentin)
+    canva.create_image(100,250,image= canva.photo_valentin)
+    canva.create_text(180,250,text="x 3 > 5*Mise",fill="gold",font="Limelight 17",anchor="w")
+    canva.create_text(180,275,text="x 2 > 2*Mise",fill="gold",font="Limelight 17",anchor="w")
 
-    canva.louis = PhotoImage(file="Image/louis.png").subsample(16)
-    canva.create_image(100,400,image=canva.louis)
-    canva.create_text(240,400,text=" x 3 > 3*Mise",fill="gold",font="Limelight 17")
-    canva.create_text(240,425,text="    x 2 > 2*Mise",fill="gold",font="Limelight 17")
+    
+    img_louis = Image.open("Image/louis.png")
+    img_louis = img_louis.resize((100,125))
+    canva.photo_louis = ImageTk.PhotoImage(img_louis)
+    canva.create_image(100,400,image= canva.photo_louis)
+    canva.create_text(180,400,text="x 3 > 3*Mise",fill="gold",font="Limelight 17",anchor="w")
+    canva.create_text(180,425,text="x 2 > 2*Mise",fill="gold",font="Limelight 17",anchor="w")
 
-    canva.tom = PhotoImage(file="Image/tom.png").subsample(14)
-    canva.create_image(100,550,image=canva.tom)
-    canva.create_text(240,550,text="   x 3 > 2*Mise",fill="gold",font="Limelight 17")
-    canva.create_text(240,575,text="  x 2 > 1*Mise",fill="gold",font="Limelight 17")
+
+
+    img_tom = Image.open("Image/tom.png")
+    img_tom = img_tom.resize((100,125))
+    canva.photo_tom = ImageTk.PhotoImage(img_tom)
+    canva.create_image(100,550,image=canva.photo_tom)
+    canva.create_text(180,550,text="x 3 > 2*Mise",fill="gold",font="Limelight 17",anchor="w")
+    canva.create_text(180,575,text="x 2 > 1*Mise",fill="gold",font="Limelight 17",anchor="w")
 
 
     canva.create_line(425,0,425,750,width=2)
