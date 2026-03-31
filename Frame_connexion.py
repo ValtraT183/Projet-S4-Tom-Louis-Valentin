@@ -4,7 +4,6 @@ from PIL import Image, ImageTk
 
 
 
-
 def creerFrameConnexion(parent,valider,quitter, creerCreerCompte):
 
     # Création de la frame
