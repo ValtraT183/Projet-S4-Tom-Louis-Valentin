@@ -1,5 +1,5 @@
 from tkinter import *
-
+from PIL import Image, ImageTk
 
 from Frame_connexion import creerFrameConnexion
 from Casino.Frame_menu import creerFrameMenu
@@ -39,6 +39,7 @@ fenetre = Tk()
 fenetre.title("Casino")
 # Taille de la fenêtre
 fenetre.geometry("1500x750")
+
 
 
 
