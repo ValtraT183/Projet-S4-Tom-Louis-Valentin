@@ -1,5 +1,5 @@
 from tkinter import *
-
+from PIL import Image, ImageTk
 
 from Frame_connexion import creerFrameConnexion
 from Casino.Frame_menu import creerFrameMenu
@@ -50,6 +50,7 @@ def recup_solde(nom):
             joueur = joueur.split("/")
             if joueur[0] == nom:
                 return int(joueur[2])
+
 
 # Frames Jeux
 
