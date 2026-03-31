@@ -35,6 +35,8 @@ def creerFrameRoulette(fenetre, fin_jeu, nom, solde, quitter):
             noir.config(state="disabled")
             pair.config(state="disabled")
             impair.config(state="disabled")
+            quitt.config(state="disabled")
+            retour.config(state="disabled")
            
             def deplacer(i):
                 global derniere_case_affichee
@@ -48,6 +50,8 @@ def creerFrameRoulette(fenetre, fin_jeu, nom, solde, quitter):
                     noir.config(state="active")
                     pair.config(state="active")
                     impair.config(state="active")
+                    quitt.config(state="active")
+                    retour.config(state="active")
                 
                     return actualiser_gain(gain, int(mise.get()))
             
@@ -274,8 +278,8 @@ def creerFrameRoulette(fenetre, fin_jeu, nom, solde, quitter):
 
     # Création du bouton quitter
 
-    quitter = Button(canva,text="Quitter",width=30,height=2,bg="red", command=quitter)
-    quitter.place(x=1250,y=700)
+    quitt = Button(canva,text="Quitter",width=30,height=2,bg="red", command=quitter)
+    quitt.place(x=1250,y=700)
 
 
 
