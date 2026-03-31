@@ -11,7 +11,7 @@ from Casino.MachineASous.MachineASous_programme import recup_gain, recup_image
 
 
 def creerFrameMachineASous(fenetre, fin_jeu, nom, solde, quitter):
-    
+    solde_joueur = int(solde)
  
     def jouer():
         canva.delete("texte")
@@ -30,7 +30,36 @@ def creerFrameMachineASous(fenetre, fin_jeu, nom, solde, quitter):
 
         canva.create_text(900,135,text=f"Gain : {recup_gain(n1,n2,n3,int(mise.get()))} VTL",font="Limelight 28",fill="gold",tags="texte")
         
-       
+        return actualiser_solde(recup_gain(n1,n2,n3,int(mise.get())), int(mise.get()))
+    
+        # Fonction actualiser le solde du joueur dans la frame
+    def actualiser_solde(gain, mise):
+        nonlocal solde_joueur
+
+        solde_joueur = solde_joueur - mise + gain
+        canva.delete("Solde")
+        canva.create_text(1350,100,text=f"Solde : {solde_joueur} VTL",font=("Arial",15),fill="white", tags="Solde")
+
+        actualiser_solde_txt(solde_joueur, nom)
+
+    # Fonction actualiser le solde dans le txt
+
+    def actualiser_solde_txt(nouveau_solde, nom):
+        global solde_courant
+        solde_courant = nouveau_solde
+        lignes=[]
+
+        with open("Compte.txt","r",encoding="utf-8") as compte:
+            lignes=compte.readlines()
+
+            for el in lignes:
+                joueur = el.strip()
+                joueur = joueur.split("/")
+                if joueur[0] == nom:
+                    lignes[lignes.index(el)] = f"{joueur[0]}/{joueur[1]}/{nouveau_solde}\n"
+
+        with open("Compte.txt", "w", encoding="utf-8") as fichier:
+            fichier.writelines(lignes) 
 
     #Création de la frame
     frame_machine_a_sous = Frame(fenetre, height=750, width=1500)
@@ -91,7 +120,7 @@ def creerFrameMachineASous(fenetre, fin_jeu, nom, solde, quitter):
 
     canva.create_text(1350,50,text=f"Nom d'utilisateur : {nom}",font=("Arial",15),fill="white")
 
-    canva.create_text(1350,100,text=f"Solde : {solde} VTL",font=("Arial",15),fill="white")
+    canva.create_text(1350,100,text=f"Solde : {solde} VTL",font=("Arial",15),fill="white", tags="Solde")
 
 
 

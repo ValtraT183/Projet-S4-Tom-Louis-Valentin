@@ -44,3 +44,20 @@ def calcul_score(liste_carte):
                 elif somme <= 21:
                         return (somme, somme-10)
         return somme
+
+
+def recup_gain(mise, win):
+        """
+        win = 0 --> le joueur a perdu
+        win = 1 --> le joueur a gagné
+        win = 2 --> égalité
+        win = 3 --> Blackjack
+        """
+        if win == 0:
+                return 0
+        elif win == 2:
+                return mise
+        elif win == 1:
+                return mise*2
+        elif win == 3:
+                return round(mise*(2.5))
