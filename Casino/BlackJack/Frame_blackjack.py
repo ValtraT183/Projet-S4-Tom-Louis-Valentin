@@ -155,9 +155,9 @@ def creerFrameBlackjack(parent, fin_jeu, nom, solde, quitter):
         win = 3 --> Blackjack
         """
         gain = recup_gain(int(mise.get()), win)
-        canva.create_text(750,425,text=f"Gain : {gain} VTL",font="Limelight 24",fill="gold",tags="texte")
+        canva.create_text(750,350,text=f"Gain : {gain} VTL",font="Limelight 24",fill="gold",tags="texte")
         if win == 3:
-            canva.create_text(800,400, text="BLACKJACK", font="Limelight 24", fill = "gold", tags="texte")
+            canva.create_text(750,400, text="BLACKJACK !!", font="Limelight 24", fill = "gold", tags="texte")
         bouton_tirer.config(state=DISABLED)
         bouton_rester.config(state=DISABLED)
         actualiser_solde(gain,int(mise.get()))
@@ -299,9 +299,9 @@ def creerFrameBlackjack(parent, fin_jeu, nom, solde, quitter):
 
 
     # Titre
-    canva.create_text(200,50,text="Blackjack",fill='white',font=("Arial",40))
+    canva.create_text(200,50,text="Blackjack",fill='firebrick',font="Rye 37")
 
-    canva.create_line(400,0,400,750,fill="black",width=2)
+    canva.create_line(450,0,450,750,fill="black",width=2)
 
 
    
@@ -332,8 +332,8 @@ def creerFrameBlackjack(parent, fin_jeu, nom, solde, quitter):
 
     # Création du bouton quitter
 
-    quitter = Button(canva,text="Quitter",width=30,height=2, command=quitter)
-    quitter.place(x=1250,y=700)
+    quitt = Button(canva,text="Quitter",width=30,height=2,bg="red", command=quitter)
+    quitt.place(x=1250,y=700)
         
 
 
@@ -343,30 +343,59 @@ def creerFrameBlackjack(parent, fin_jeu, nom, solde, quitter):
     retour.place(x=1250,y=600)
 
 
-    #Débuter la partie
+    # Débuter la partie
 
     commencer = Button(canva,text="Commencer une partie",width=20,command=commencer_partie)
-    commencer.place(x=700,y=300)
+    commencer.place(x=1250,y=400)
 
 
     # Création bouton tirer une carte
 
     bouton_tirer = Button(canva,text="Tirer",width=20,command=tirer, state=DISABLED)
-    bouton_tirer.place(x=550,y=700)
+    bouton_tirer.place(x=575,y=700)
         
     # Bouton rester
 
     bouton_rester = Button(canva,text="Rester",width=20,command=rester, state=DISABLED)
-    bouton_rester.place(x=750,y=700)
+    bouton_rester.place(x=775,y=700)
 
 
     # Création menu déroulant pour sélectionner la mise 
     
     liste_mise =[5,10,20,50,100,200,500,1000]
-    mise = ttk.Combobox(canva,values=liste_mise,state="readonly")
+    mise = ttk.Combobox(canva,values=liste_mise,state="readonly",width=21)
     mise.current(0)
-    mise.place(x=300,y=400)    
+    mise.place(x=1250,y=350)    
 
+
+
+    # Affichage des règles
+
+    canva.create_text(220,120, text="Le joueur mise puis reçoit deux cartes visibles.", fill="gold", font="Limelight 13")
+    
+    canva.create_text(220,180, text="Le croupier reçoit aussi deux cartes,", fill="gold", font="Limelight 13")
+    canva.create_text(220,200, text="dont une seule est visible.", fill="gold", font="Limelight 13")
+    
+    canva.create_text(220,260, text="Le but est d'obtenir un total de points",fill="gold", font="Limelight 13")
+    canva.create_text(220,280, text="le plus proche possible de 21 sans le dépasser",fill="gold", font="Limelight 13")
+    
+    canva.create_text(220,340, text="Le joueur peut tirer des cartes", fill="gold", font="Limelight 13")
+    canva.create_text(220,360, text="ou s’arrêter quand il le souhaite.", fill="gold", font="Limelight 13")
+    canva.create_text(220,380, text="S’il dépasse 21, il perd immédiatement.", fill="gold", font="Limelight 13")
+    
+    canva.create_text(220,420, text="Ensuite, le croupier joue :", fill="gold", font="Limelight 13")
+    canva.create_text(220,440, text="il tire tant que son total est inférieur à 17,", fill="gold", font="Limelight 13")
+    canva.create_text(220,460, text="puis s’arrête.", fill="gold", font="Limelight 13")
+    canva.create_text(220,480, text="Si le croupier dépasse 21, le joueur gagne. ", fill="gold", font="Limelight 13")
+
+    canva.create_text(220,540, text="Le joueur gagne s’il a un score supérieur,", fill="gold", font="Limelight 13")
+    canva.create_text(220,560, text="perd s’il a moins,", fill="gold", font="Limelight 13")
+    canva.create_text(220,580, text="et en cas d’égalité, la mise est rendue.", fill="gold", font="Limelight 13")
+
+    canva.create_text(220,640, text="Un blackjack (21 avec deux cartes),", fill="gold", font="Limelight 13")
+    canva.create_text(220,660, text="est la meilleure main ", fill="gold", font="Limelight 13")
+    canva.create_text(220,680, text="et gagne immédiatement (x3)", fill="gold", font="Limelight 13")
+  
 
     return {
         "frame": frame_blackjack,

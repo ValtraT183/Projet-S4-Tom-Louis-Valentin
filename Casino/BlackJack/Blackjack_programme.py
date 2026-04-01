@@ -60,4 +60,4 @@ def recup_gain(mise, win):
         elif win == 1:
                 return mise*2
         elif win == 3:
-                return round(mise*(2.5))
+                return mise*3
