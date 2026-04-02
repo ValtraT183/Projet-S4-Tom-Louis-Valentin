@@ -4,9 +4,10 @@ from PIL import Image, ImageTk
 from random import*
 from Casino.JeuDeDes.JeuDeDes_programme import recup_gain, recup_image
 
+from verif_solde_mise import verif_mise, verif_solde
 
 
-def creerFrameJeuDeDes(parent, fin_jeu, nom, solde, quitter):
+def creerFrameJeuDeDes(fenetre, fin_jeu, nom, solde, quitter):
 
     solde_joueur = int(solde)
 
@@ -14,7 +15,10 @@ def creerFrameJeuDeDes(parent, fin_jeu, nom, solde, quitter):
         global de1,de2,de3,de1a,de2a,de3a
         global n1,n2,n3,n1a,n2a,n3a
 
-        
+        if verif_mise(fenetre, solde_joueur, int(mise.get())): #Verif mise
+            pass
+        else:
+            return None
         
         n1, n2, n3 = randint(1,6), randint(1,6), randint(1,6)
         n1a, n2a, n3a = randint(1,6), randint(1,6), randint(1,6)
@@ -53,6 +57,13 @@ def creerFrameJeuDeDes(parent, fin_jeu, nom, solde, quitter):
         solde_joueur = solde_joueur - mise + gain
         canva.delete("Solde")
         canva.create_text(1350,100,text=f"Solde : {solde_joueur} VTL",font=("Arial",15),fill="white", tags="Solde")
+        
+        #On vérifie que le joueur à toujours assez de VTL pour jouer au casino
+        if verif_solde(fenetre, solde_joueur, nom):
+            pass
+        else:
+            canva.after(5000, fenetre.destroy)
+
 
         actualiser_solde_txt(solde_joueur, nom)
 
@@ -78,7 +89,7 @@ def creerFrameJeuDeDes(parent, fin_jeu, nom, solde, quitter):
     
     #Création de la frame
 
-    frame_jeu_de_des = Frame(parent, height=750, width=1500)
+    frame_jeu_de_des = Frame(fenetre, height=750, width=1500)
 
 
     # Création du canva 
