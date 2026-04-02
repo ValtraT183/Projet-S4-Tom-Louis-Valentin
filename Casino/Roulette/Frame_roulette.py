@@ -5,6 +5,7 @@ from random import*
 
 from Casino.Roulette.Roulette_programme import *
 
+from verif_solde_mise import verif_mise, verif_solde
 
 
 
@@ -16,6 +17,12 @@ def creerFrameRoulette(fenetre, fin_jeu, nom, solde, quitter):
 
     def jouer() :
         canva.delete("texte")
+
+        if verif_mise(fenetre, solde_joueur, int(mise.get())): #Verif mise
+            pass
+        else:
+            return None
+
         canva.delete("Solde")
         canva.create_text(1350,100,text=f"Solde : {solde_joueur - int(mise.get())} VTL",font=("Arial",15),fill="white",tags="Solde")
 
@@ -77,6 +84,12 @@ def creerFrameRoulette(fenetre, fin_jeu, nom, solde, quitter):
         canva.delete("Solde")
         canva.create_text(1350,100,text=f"Solde : {solde_joueur} VTL",font=("Arial",15),fill="white", tags="Solde")
 
+        #On vérifie que le joueur à toujours assez de VTL pour jouer au casino
+        if verif_solde(fenetre, solde_joueur, nom):
+            pass
+        else:
+            canva.after(5000, fenetre.destroy)
+            
         actualiser_solde_txt(solde_joueur, nom)
 
     # Fonction actualiser le solde dans le txt
