@@ -11,7 +11,7 @@ from verif_solde_mise import verif_mise, verif_solde
 
 
 
-def creerFrameMachineASous(fenetre, fin_jeu, nom, solde, quitter):
+def creerFrameMachineASous(fenetre, fin_jeu, nom, solde, quitter, machineASousToConnexion):
     solde_joueur = int(solde)
  
     def jouer():
@@ -51,7 +51,9 @@ def creerFrameMachineASous(fenetre, fin_jeu, nom, solde, quitter):
         if verif_solde(fenetre, solde_joueur, nom):
             pass
         else:
-            canva.after(5000, fenetre.destroy)
+            lancer.config(state=DISABLED)
+            retour.config(state=DISABLED)
+            canva.after(5000, machineASousToConnexion)
 
         actualiser_solde_txt(solde_joueur, nom)
 
