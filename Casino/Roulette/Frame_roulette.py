@@ -10,7 +10,7 @@ from verif_solde_mise import verif_mise, verif_solde
 
 
 
-def creerFrameRoulette(fenetre, fin_jeu, nom, solde, quitter):
+def creerFrameRoulette(fenetre, fin_jeu, nom, solde, quitter, rouletteToConnexion):
     
     solde_joueur = int(solde)
 
@@ -88,7 +88,9 @@ def creerFrameRoulette(fenetre, fin_jeu, nom, solde, quitter):
         if verif_solde(fenetre, solde_joueur, nom):
             pass
         else:
-            canva.after(5000, fenetre.destroy)
+            lancer.config(state=DISABLED)
+            retour.config(state=DISABLED)
+            canva.after(5000, rouletteToConnexion)
             
         actualiser_solde_txt(solde_joueur, nom)
 

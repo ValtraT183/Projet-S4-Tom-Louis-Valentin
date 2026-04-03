@@ -13,7 +13,7 @@ def supprimer_compte(nom):
                 joueur = el.strip()
                 joueur = joueur.split("/")
                 if joueur[0] != nom:
-                    nouvelles_lignes.apppend(el)
+                    nouvelles_lignes.append(el)
 
         with open("Compte.txt", "w", encoding="utf-8") as fichier:
             fichier.writelines(nouvelles_lignes) 
