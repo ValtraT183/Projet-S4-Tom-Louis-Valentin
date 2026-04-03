@@ -40,6 +40,8 @@ fenetre.title("Casino")
 # Taille de la fenêtre
 fenetre.geometry("1500x750")
 
+fenetre.resizable(width=False, height=False)
+fenetre.minsize(width=1500, height=750)
 
 #Récupérer le solde après chaque actualisation du txt
 def recup_solde(nom):
