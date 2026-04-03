@@ -11,6 +11,7 @@ from verif_solde_mise import verif_mise, verif_solde
 def creerFrameBlackjack(fenetre, fin_jeu, nom, solde, quitter, blackjackToConnexion):
     solde_joueur = int(solde)
 
+
     def commencer_partie():
         global carte_croupier
         global carte_joueur
@@ -28,6 +29,8 @@ def creerFrameBlackjack(fenetre, fin_jeu, nom, solde, quitter, blackjackToConnex
         commencer.config(state = DISABLED)
         bouton_tirer.config(state=ACTIVE)
         bouton_rester.config(state=ACTIVE)
+        retour.config(state = DISABLED)
+        quitt.config(state = DISABLED)
 
         croupier_cache = True
         carte_croupier = [tirer_cartes(), tirer_cartes()]
@@ -212,6 +215,8 @@ def creerFrameBlackjack(fenetre, fin_jeu, nom, solde, quitter, blackjackToConnex
     def reset():
 
         commencer.config(state = ACTIVE)
+        retour.config(state = ACTIVE)
+        quitt.config(state = ACTIVE)
 
         canva.delete("resultat")
         canva.delete("score")
