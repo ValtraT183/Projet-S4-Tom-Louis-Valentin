@@ -7,7 +7,7 @@ from Casino.JeuDeDes.JeuDeDes_programme import recup_gain, recup_image
 from verif_solde_mise import verif_mise, verif_solde
 
 
-def creerFrameJeuDeDes(fenetre, fin_jeu, nom, solde, quitter):
+def creerFrameJeuDeDes(fenetre, fin_jeu, nom, solde, quitter, jeuDeDesToConnexion):
 
     solde_joueur = int(solde)
 
@@ -62,8 +62,9 @@ def creerFrameJeuDeDes(fenetre, fin_jeu, nom, solde, quitter):
         if verif_solde(fenetre, solde_joueur, nom):
             pass
         else:
-            canva.after(5000, fenetre.destroy)
-
+            lancer.config(state=DISABLED)
+            retour.config(state=DISABLED)
+            canva.after(5000, jeuDeDesToConnexion)
 
         actualiser_solde_txt(solde_joueur, nom)
 

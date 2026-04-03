@@ -8,7 +8,7 @@ from time import*
 from verif_solde_mise import verif_mise, verif_solde
 
 
-def creerFrameBlackjack(fenetre, fin_jeu, nom, solde, quitter):
+def creerFrameBlackjack(fenetre, fin_jeu, nom, solde, quitter, blackjackToConnexion):
     solde_joueur = int(solde)
 
     def commencer_partie():
@@ -181,8 +181,9 @@ def creerFrameBlackjack(fenetre, fin_jeu, nom, solde, quitter):
         if verif_solde(fenetre, solde_joueur, nom):
             pass
         else:
-            canva.after(5000, fenetre.destroy)
-
+            commencer.config(state=DISABLED)
+            retour.config(state=DISABLED)
+            canva.after(5000, blackjackToConnexion)
 
         actualiser_solde_txt(solde_joueur, nom)
 
