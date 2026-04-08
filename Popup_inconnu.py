@@ -4,6 +4,7 @@ from tkinter import *
 def afficherPopUpInconnu(parent):
 
     fen = Toplevel(parent)
+    fen.iconbitmap("Image/casinologo.ico")
 
     Label(fen, text="L'identifiant ou le mot de passe est incorrect").pack()
 

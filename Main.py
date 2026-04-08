@@ -39,6 +39,7 @@ fenetre = Tk()
 fenetre.title("Casino")
 # Taille de la fenêtre
 fenetre.geometry("1500x750")
+fenetre.iconbitmap("Image/casinologo.ico")
 
 fenetre.resizable(width=False, height=False)
 fenetre.minsize(width=1500, height=750)

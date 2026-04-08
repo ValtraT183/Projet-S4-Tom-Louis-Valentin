@@ -216,7 +216,7 @@ def creerFrameBlackjack(fenetre, fin_jeu, nom, solde, quitter, blackjackToConnex
 
         commencer.config(state = ACTIVE)
         retour.config(state = ACTIVE)
-        quitt.config(state = ACTIVE)
+        quitt.config(state = NORMAL)
 
         canva.delete("resultat")
         canva.delete("score")
@@ -386,6 +386,7 @@ def creerFrameBlackjack(fenetre, fin_jeu, nom, solde, quitter, blackjackToConnex
     mise = ttk.Combobox(canva,values=liste_mise,state="readonly",width=21)
     mise.current(0)
     mise.place(x=1250,y=350)    
+    canva.create_text(1280,300,text="Mise :",font="Limelight 19",fill="gold")
 
 
 
