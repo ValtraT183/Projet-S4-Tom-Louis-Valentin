@@ -1,5 +1,5 @@
 from tkinter import *
-from PIL import Image, ImageTk
+from winsound import *
 
 from Frame_connexion import creerFrameConnexion
 from Casino.Frame_menu import creerFrameMenu
@@ -43,6 +43,7 @@ fenetre.geometry("1500x750")
 fenetre.resizable(width=False, height=False)
 fenetre.minsize(width=1500, height=750)
 
+
 #Récupérer le solde après chaque actualisation du txt
 def recup_solde(nom):
     with open("Compte.txt", "r", encoding="utf-8") as compte:
@@ -54,6 +55,10 @@ def recup_solde(nom):
                 return int(joueur[2])
 
 
+def fermer() :
+    PlaySound(None,0)
+    fenetre.destroy()
+
 # Frames Jeux
 
 
@@ -64,7 +69,7 @@ def jeuToMenu(frame_jeu):
 
     nouveau_solde = recup_solde(nom_uti)
 
-    frame_menu = creerFrameMenu(fenetre, menuToConnexion, nom_uti, nouveau_solde, fenetre.destroy, creerMachineASous, creerJeuDeDes, creerBlackjack, creerRoulette) #recréer menu avec nouveau solde
+    frame_menu = creerFrameMenu(fenetre, menuToConnexion, nom_uti, nouveau_solde, fermer, creerMachineASous, creerJeuDeDes, creerBlackjack, creerRoulette) #recréer menu avec nouveau solde
     frame_jeu["frame"].pack_forget()
     frame_menu["frame"].pack(fill="both", expand=True)
 
@@ -118,7 +123,7 @@ def creerMachineASous():
 
     nouveau_solde = recup_solde(nom_uti)
 
-    frame_machine_a_sous = creerFrameMachineASous(fenetre, fin_jeu_MachineAsous, nom_uti, nouveau_solde, fenetre.destroy, machineASousToConnexion)
+    frame_machine_a_sous = creerFrameMachineASous(fenetre, fin_jeu_MachineAsous, nom_uti, nouveau_solde, fermer,machineASousToConnexion)
 
     frame_menu["frame"].pack_forget()
     frame_machine_a_sous["frame"].pack(fill="both", expand=True) #échange des frames => retour menu machine à sous à menu casino
@@ -129,7 +134,7 @@ def creerJeuDeDes():
     global frame_jeu_de_des
     nouveau_solde = recup_solde(nom_uti)
 
-    frame_jeu_de_des = creerFrameJeuDeDes(fenetre, fin_jeu_JeuDeDes, nom_uti, nouveau_solde, fenetre.destroy, jeuDeDesToConnexion)
+    frame_jeu_de_des = creerFrameJeuDeDes(fenetre, fin_jeu_JeuDeDes, nom_uti, nouveau_solde,fermer,jeuDeDesToConnexion)
 
     frame_menu["frame"].pack_forget()
     frame_jeu_de_des["frame"].pack(fill="both", expand=True) #échange des frames => retour menu jeu de dés à menu casino
@@ -140,7 +145,7 @@ def creerBlackjack():
     global frame_blackjack
     nouveau_solde = recup_solde(nom_uti)
 
-    frame_blackjack = creerFrameBlackjack(fenetre, fin_jeu_Blackjack, nom_uti, nouveau_solde, fenetre.destroy, blackjackToConnexion)
+    frame_blackjack = creerFrameBlackjack(fenetre, fin_jeu_Blackjack, nom_uti, nouveau_solde,fermer,blackjackToConnexion)
 
     frame_menu["frame"].pack_forget()
     frame_blackjack["frame"].pack(fill="both", expand=True) #échange des frames => retour menu jeu de dés à menu casino
@@ -151,12 +156,12 @@ def creerRoulette():
     global frame_roulette
     nouveau_solde = recup_solde(nom_uti)
 
-    frame_roulette = creerFrameRoulette(fenetre, fin_jeu_Roulette, nom_uti, nouveau_solde, fenetre.destroy, rouletteToConnexion)
+    frame_roulette = creerFrameRoulette(fenetre, fin_jeu_Roulette, nom_uti, nouveau_solde, fermer,rouletteToConnexion)
 
     frame_menu["frame"].pack_forget()
     frame_roulette["frame"].pack(fill="both", expand=True) #échange des frames => retour menu machine à sous à menu casino
 
-
+ 
 
 # Fonctions valider connexion
 
@@ -194,7 +199,7 @@ def valider():
                 solde_uti = el[2] #on récupère son solde dans la variable global
 
                 frame_connexion["frame"].pack_forget()
-                frame_menu = creerFrameMenu(fenetre, menuToConnexion, nom_uti, solde_uti, fenetre.destroy, creerMachineASous, creerJeuDeDes, creerBlackjack, creerRoulette) #on passe au menu
+                frame_menu = creerFrameMenu(fenetre, menuToConnexion, nom_uti, solde_uti, fermer, creerMachineASous, creerJeuDeDes, creerBlackjack, creerRoulette) #on passe au menu
                 frame_menu["frame"].pack(fill="both", expand=True) #on affiche le menu
                 return None
 
@@ -251,7 +256,7 @@ def creerCreerCompte():
     global frame_connexion
     global frame_creer_compte
 
-    frame_creer_compte = creerFrameCreerCompte(fenetre, CreerCompteToConnexion, valider_nouveau_compte, fenetre.destroy)
+    frame_creer_compte = creerFrameCreerCompte(fenetre, CreerCompteToConnexion, valider_nouveau_compte,fermer)
 
     frame_connexion["frame"].pack_forget()
     frame_creer_compte["frame"].pack(fill="both", expand=True) #échange des frames => retour menu jeu de dés à menu casino
@@ -273,9 +278,18 @@ def menuToConnexion():
 
 
 
-#affichage menu connexion
-frame_connexion = creerFrameConnexion(fenetre, valider, fenetre.destroy, creerCreerCompte)
+# Affichage menu connexion
+frame_connexion = creerFrameConnexion(fenetre, valider,fermer, creerCreerCompte)
 frame_connexion["frame"].pack(fill="both", expand=True)
+
+
+
+# Pour la musique 
+fenetre.protocol("WM_DELETE_WINDOW", fermer)  # au lieu de fermer la fenêtre quand on appuye sur la croix, ça exécute la fonction)
+PlaySound("Son/musique.wav",SND_ASYNC | SND_LOOP)
+
+
+ 
 
 # Démarrage de la boucle Tkinter (à placer à la fin !!!)
 fenetre.mainloop()
