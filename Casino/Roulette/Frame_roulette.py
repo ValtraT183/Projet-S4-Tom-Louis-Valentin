@@ -5,7 +5,7 @@ from random import*
 
 from Casino.Roulette.Roulette_programme import *
 
-from verif_solde_mise import verif_mise, verif_solde
+from Fonctions_utiles import verif_mise, verif_solde
 
 
 
