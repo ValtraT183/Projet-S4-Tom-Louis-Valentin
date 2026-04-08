@@ -293,3 +293,4 @@ PlaySound("Son/musique.wav",SND_ASYNC | SND_LOOP)
 
 # Démarrage de la boucle Tkinter (à placer à la fin !!!)
 fenetre.mainloop()
+
