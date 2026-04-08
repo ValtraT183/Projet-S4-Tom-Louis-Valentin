@@ -5,22 +5,32 @@ from random import*
 from Casino.Blackjack.Blackjack_programme import*
 from time import*
 
+from Fonctions_utiles import verif_mise, verif_solde
 
 
-def creerFrameBlackjack(parent, fin_jeu, nom, solde, quitter):
+def creerFrameBlackjack(fenetre, fin_jeu, nom, solde, quitter, blackjackToConnexion):
     solde_joueur = int(solde)
+
 
     def commencer_partie():
         global carte_croupier
         global carte_joueur
         global croupier_cache
 
+        canva.delete("texte")
+
+        if verif_mise(fenetre, solde_joueur, int(mise.get())): #Verif mise
+            pass
+        else:
+            return None
+
         canva.delete("Solde")
         canva.create_text(1350,100,text=f"Solde : {solde_joueur - int(mise.get())} VTL",font=("Arial",15),fill="white",tags="Solde")
-        canva.delete("texte")
         commencer.config(state = DISABLED)
         bouton_tirer.config(state=ACTIVE)
         bouton_rester.config(state=ACTIVE)
+        retour.config(state = DISABLED)
+        quitt.config(state = DISABLED)
 
         croupier_cache = True
         carte_croupier = [tirer_cartes(), tirer_cartes()]
@@ -170,6 +180,14 @@ def creerFrameBlackjack(parent, fin_jeu, nom, solde, quitter):
         canva.delete("Solde")
         canva.create_text(1350,100,text=f"Solde : {solde_joueur} VTL",font=("Arial",15),fill="white", tags="Solde")
 
+        #On vérifie que le joueur à toujours assez de VTL pour jouer au casino
+        if verif_solde(fenetre, solde_joueur, nom):
+            pass
+        else:
+            commencer.config(state=DISABLED)
+            retour.config(state=DISABLED)
+            canva.after(5000, blackjackToConnexion)
+
         actualiser_solde_txt(solde_joueur, nom)
 
     # Fonction actualiser le solde dans le txt
@@ -197,6 +215,8 @@ def creerFrameBlackjack(parent, fin_jeu, nom, solde, quitter):
     def reset():
 
         commencer.config(state = ACTIVE)
+        retour.config(state = ACTIVE)
+        quitt.config(state = ACTIVE)
 
         canva.delete("resultat")
         canva.delete("score")
@@ -281,7 +301,7 @@ def creerFrameBlackjack(parent, fin_jeu, nom, solde, quitter):
 
     #Création de la frame
 
-    frame_blackjack = Frame(parent, height=750, width=1500)
+    frame_blackjack = Frame(fenetre, height=750, width=1500)
 
 
     # Création du canva 

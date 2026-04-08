@@ -1,3 +1,2 @@
-t/t/300
-valentin/v/50
-l/l/5000
+valentin/v/17000
+t/t/1000

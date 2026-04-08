@@ -4,17 +4,24 @@ from PIL import Image, ImageTk
 from random import*
 from Casino.MachineASous.MachineASous_programme import recup_gain, recup_image
 
+from Fonctions_utiles import verif_mise, verif_solde
 
 
     
 
 
 
-def creerFrameMachineASous(fenetre, fin_jeu, nom, solde, quitter):
+def creerFrameMachineASous(fenetre, fin_jeu, nom, solde, quitter, machineASousToConnexion):
     solde_joueur = int(solde)
  
     def jouer():
         canva.delete("texte")
+
+        if verif_mise(fenetre, solde_joueur, int(mise.get())): #Verif mise
+            pass
+        else:
+            return None
+
         global case1,case2,case3
 
         n1 = randint(1,4)
@@ -39,6 +46,14 @@ def creerFrameMachineASous(fenetre, fin_jeu, nom, solde, quitter):
         solde_joueur = solde_joueur - mise + gain
         canva.delete("Solde")
         canva.create_text(1350,100,text=f"Solde : {solde_joueur} VTL",font=("Arial",15),fill="white", tags="Solde")
+
+        #On vérifie que le joueur à toujours assez de VTL pour jouer au casino
+        if verif_solde(fenetre, solde_joueur, nom):
+            pass
+        else:
+            lancer.config(state=DISABLED)
+            retour.config(state=DISABLED)
+            canva.after(5000, machineASousToConnexion)
 
         actualiser_solde_txt(solde_joueur, nom)
 
