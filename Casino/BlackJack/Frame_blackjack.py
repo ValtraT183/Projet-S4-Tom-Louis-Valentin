@@ -297,7 +297,7 @@ def creerFrameBlackjack(fenetre, fin_jeu, nom, solde, quitter, blackjackToConnex
             img = recup_image(carte)
             canva.images.append(img)
             canva.create_image(610 + i*ecart_carte_joueur ,575,image=img, tags= "cartes")
-
+    
 
     #Création de la frame
 
@@ -417,14 +417,6 @@ def creerFrameBlackjack(fenetre, fin_jeu, nom, solde, quitter, blackjackToConnex
     canva.create_text(220,680, text="et gagne immédiatement (x3)", fill="gold", font="Limelight 13")
   
 
-
-
-
-
-  # Binds
-
-
-    commencer.bind('<space>', commencer_partie)
     
 
     return {
