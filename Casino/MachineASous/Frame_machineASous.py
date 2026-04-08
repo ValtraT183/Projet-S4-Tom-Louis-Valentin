@@ -4,7 +4,7 @@ from PIL import Image, ImageTk
 from random import*
 from Casino.MachineASous.MachineASous_programme import recup_gain, recup_image
 
-from verif_solde_mise import verif_mise, verif_solde
+from Fonctions_utiles import verif_mise, verif_solde
 
 
     

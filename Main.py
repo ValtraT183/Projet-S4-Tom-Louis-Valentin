@@ -220,7 +220,7 @@ def valider_nouveau_compte():
     frame_creer_compte["age"].set("")       #Vider les Entry
     frame_creer_compte["politique"].set(0)
 
-    if age <= 18:           # Vérification age
+    if age < 18:           # Vérification age
         return afficherPopUp18ans(fenetre)
     
     if not politique:   # Vérification politique

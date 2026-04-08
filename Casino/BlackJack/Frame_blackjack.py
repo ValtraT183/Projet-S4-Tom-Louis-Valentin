@@ -5,7 +5,7 @@ from random import*
 from Casino.Blackjack.Blackjack_programme import*
 from time import*
 
-from verif_solde_mise import verif_mise, verif_solde
+from Fonctions_utiles import verif_mise, verif_solde
 
 
 def creerFrameBlackjack(fenetre, fin_jeu, nom, solde, quitter, blackjackToConnexion):
