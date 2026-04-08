@@ -4,6 +4,7 @@ from tkinter import *
 def afficherPopUpPasDeVTL(parent):
 
     fen = Toplevel(parent)
+    fen.iconbitmap("Image/casinologo.ico")
 
     canva = Canvas(fen, height=300, width=500)
     canva.pack()

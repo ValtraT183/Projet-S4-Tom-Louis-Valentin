@@ -4,6 +4,7 @@ from tkinter import *
 def afficherPopUp18ans(parent):
 
     fen = Toplevel(parent)
+    fen.iconbitmap("Image/casinologo.ico")
 
     Label(fen, text="Vous n'avez pas l'âge requis (18 ans minimum)").pack()
 
