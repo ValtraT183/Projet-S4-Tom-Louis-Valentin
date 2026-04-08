@@ -417,6 +417,16 @@ def creerFrameBlackjack(fenetre, fin_jeu, nom, solde, quitter, blackjackToConnex
     canva.create_text(220,680, text="et gagne immédiatement (x3)", fill="gold", font="Limelight 13")
   
 
+
+
+
+
+  # Binds
+
+
+    commencer.bind('<space>', commencer_partie)
+    
+
     return {
         "frame": frame_blackjack,
         "nom_uti": nom,
