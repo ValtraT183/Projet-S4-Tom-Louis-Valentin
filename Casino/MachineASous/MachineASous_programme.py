@@ -1,9 +1,12 @@
 from PIL import Image, ImageTk 
 
 
-# Création des fonctions pour le jeu 
 
 
+
+
+# Fonction récuperer gain
+# -------------------------------------------------------------------------------------------
 
 def recup_gain(numero1,numero2,numero3,mise):
     liste_num = [numero1,numero2,numero3,]
@@ -32,10 +35,18 @@ def recup_gain(numero1,numero2,numero3,mise):
 
     return gain
 
+# -------------------------------------------------------------------------------------------
 
 
 
 
+
+
+
+
+
+# Fonction ouvrir image (et conversion)
+# -------------------------------------------------------------------------------------------
 
 def recup_image(numero):
     if numero == 1 :
@@ -56,6 +67,8 @@ def recup_image(numero):
         img = Image.open("Image/rien.png")
         img = img.resize((114,170))
         return ImageTk.PhotoImage(img)
+
+# -------------------------------------------------------------------------------------------
 
 
 

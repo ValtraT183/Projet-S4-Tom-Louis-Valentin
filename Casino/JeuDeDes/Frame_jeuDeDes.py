@@ -3,13 +3,23 @@ from tkinter import ttk
 from PIL import Image, ImageTk 
 from random import*
 from Casino.JeuDeDes.JeuDeDes_programme import recup_gain, recup_image
-
 from Fonctions_utiles import verif_mise, verif_solde
 
 
+
+# Fonction créer frame jeu de des
+# -------------------------------------------------------------------------------------------
 def creerFrameJeuDeDes(fenetre, fin_jeu, nom, solde, quitter, jeuDeDesToConnexion):
 
     solde_joueur = int(solde)
+ 
+
+  
+
+
+
+    # Fonction jouer
+ # -------------------------------------------------------------------------------------------
 
     def jouer():
         global de1,de2,de3,de1a,de2a,de3a
@@ -50,7 +60,18 @@ def creerFrameJeuDeDes(fenetre, fin_jeu, nom, solde, quitter, jeuDeDesToConnexio
         canva.itemconfig(gain,text=f"Gain : {recup_gain(int(mise.get()),tot_b,tot_u)}")
         
         return actualiser_solde(recup_gain(int(mise.get()),tot_b,tot_u), int(mise.get()))
+    
+# -------------------------------------------------------------------------------------------
 
+
+
+
+
+
+
+    
+    # Fonction actualiser le solde 
+# -------------------------------------------------------------------------------------------
     def actualiser_solde(gain, mise):
         nonlocal solde_joueur
 
@@ -68,7 +89,17 @@ def creerFrameJeuDeDes(fenetre, fin_jeu, nom, solde, quitter, jeuDeDesToConnexio
 
         actualiser_solde_txt(solde_joueur, nom)
 
+# -------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
     # Fonction actualiser le solde dans le txt
+# -------------------------------------------------------------------------------------------
 
     def actualiser_solde_txt(nouveau_solde, nom):
         global solde_courant
@@ -87,48 +118,87 @@ def creerFrameJeuDeDes(fenetre, fin_jeu, nom, solde, quitter, jeuDeDesToConnexio
         with open("Compte.txt", "w", encoding="utf-8") as fichier:
             fichier.writelines(lignes)    
 
+# -------------------------------------------------------------------------------------------
+
+
+
+
+
     
     #Création de la frame
+# -------------------------------------------------------------------------------------------
 
     frame_jeu_de_des = Frame(fenetre, height=750, width=1500)
 
+# -------------------------------------------------------------------------------------------
+
+
+
+
 
     # Création du canva 
+# -------------------------------------------------------------------------------------------
 
     canva = Canvas(frame_jeu_de_des, width=1500, height=750)
     canva.place(x= 0,y=0)
 
+# -------------------------------------------------------------------------------------------
+
+
+
+
 
     # Fond de la fenêtre
+# -------------------------------------------------------------------------------------------
 
     image = Image.open("Image/background.png")
     image = image.resize((1500, 750))
     canva.photo_background = ImageTk.PhotoImage(image)
     canva.create_image(0, 0, anchor=NW, image=canva.photo_background)
 
+# -------------------------------------------------------------------------------------------
+
+
+
+
+
     
     # Titre
+# -------------------------------------------------------------------------------------------  
     canva.create_text(200,50,text="Jeu de dés",fill='firebrick',font="Rye 37")
 
     canva.create_line(400,0,400,750,fill="black",width=2)
+# -------------------------------------------------------------------------------------------
+
+
+
+
+
+
 
     # Affichage des règles
+# -------------------------------------------------------------------------------------------
 
     canva.create_text(200,140, text="Le joueur donne une mise puis lance 3 dés.", fill="gold", font="Limelight 13")
     canva.create_text(200,180, text="Le croupier fait de même.", fill="gold", font="Limelight 13")
 
     canva.create_text(200,270, text="Si la somme des dés du joueur", fill="gold", font="Limelight 13")
     canva.create_text(200,310, text="est plus élevée que celle du croupier,", fill="gold", font="Limelight 13")
-
     canva.create_text(200,400, text="il remporte le gain associé à sa mise.", fill="gold", font="Limelight 13")
-
     canva.create_text(200,490, text="Sinon il perd sa mise.", fill="gold", font="Limelight 13")
 
     canva.create_text(200,580, text="En cas d'égalité,", fill="gold", font="Limelight 13")
     canva.create_text(200,620, text="le joueur récupère sa mise divisée par 2.", fill="gold", font="Limelight 13")
     
-    # Création des tables
+# -------------------------------------------------------------------------------------------
 
+
+
+
+
+
+    # Création des tables
+# -------------------------------------------------------------------------------------------
 
     # table du haut
 
@@ -145,59 +215,99 @@ def creerFrameJeuDeDes(fenetre, fin_jeu, nom, solde, quitter, jeuDeDesToConnexio
     canva.create_line(550,500,550,650,fill="white",width="2")
     canva.create_line(950,500,950,650,fill="white",width="2")
 
-   
+# ------------------------------------------------------------------------------------------- 
 
 
 
     # Affichage des totaux
+# ------------------------------------------------------------------------------------------- 
+
     total_banque = canva.create_text(750,270,text=f"Total banque : {0}",fill='gold',font="Limelight 19")
     total_joueur = canva.create_text(750,480,text=f"Total : {0}",fill='gold',font="Limelight 19")
 
+# -------------------------------------------------------------------------------------------
+
+
+
 
     # Création du bouton quitter
+# -------------------------------------------------------------------------------------------
 
     quitt = Button (canva,text="Quitter",width=30,height=2, bg="red", command=quitter)
     quitt.place(x=1250,y=700)
         
+# -------------------------------------------------------------------------------------------
+
+
+
+
 
 
     # Création du boutton retour au menu 
+# -------------------------------------------------------------------------------------------
 
     retour = Button(canva,text="Retour",width=30,height=2, command=fin_jeu)
     retour.place(x=1250,y=600)
 
+# -------------------------------------------------------------------------------------------
 
+
+
+    
     # Affichage du nom de l'utilisateur et du solde
+# -------------------------------------------------------------------------------------------
 
     canva.create_text(1350,50,text=f"Nom d'utilisateur : {nom}",font=("Arial",15),fill="white")
     canva.create_text(1350,100,text=f"Solde : {solde_joueur} VTL",font=("Arial",15),fill="white", tags="Solde")
 
+# -------------------------------------------------------------------------------------------
+
+
+
+
 
     # Création bouton lancer les dés
+# -------------------------------------------------------------------------------------------
 
     lancer = Button(canva,text="Lancer les dés",width=20,command=jouer)
     lancer.place(x=525,y=400)
         
+# -------------------------------------------------------------------------------------------
+
+
 
 
 
     # Création menu déroulant pour sélectionner la mise 
-    
+# -------------------------------------------------------------------------------------------  
     liste_mise =[5,10,20,50,100,200,500,1000]
+
     mise = ttk.Combobox(canva,values=liste_mise,state="readonly")
     mise.place(x=800,y=400) 
     mise.current(0)   
     canva.create_text(870,370,text="Mise :",font="Limelight 19",fill="gold")
-    
+
+# -------------------------------------------------------------------------------------------   
+
+
+
+
 
 
     # Affichage gain total 
-
+# -------------------------------------------------------------------------------------------
+    
     gain = canva.create_text(1300,350,text=f"Gain : {0}",fill='gold',font="Limelight 19")
 
-
+# -------------------------------------------------------------------------------------------
+    
+    
+    
+    
     return {
         "frame": frame_jeu_de_des,
         "nom_uti": nom,
         "solde_uti": solde_joueur,
     }
+
+#-------------------------------------------------------------------------------------------
