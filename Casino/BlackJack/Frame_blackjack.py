@@ -202,13 +202,13 @@ def creerFrameBlackjack(fenetre, fin_jeu, nom, solde, quitter, blackjackToConnex
 
         #On vérifie que le joueur à toujours assez de VTL pour jouer au casino
         if verif_solde(fenetre, solde_joueur, nom):
-            pass
+            actualiser_solde_txt(solde_joueur, nom)
+
         else:
             commencer.config(state=DISABLED)
             retour.config(state=DISABLED)
             canva.after(5000, blackjackToConnexion)
 
-        actualiser_solde_txt(solde_joueur, nom)
 
 
 
