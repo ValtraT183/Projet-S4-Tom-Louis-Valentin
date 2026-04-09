@@ -25,6 +25,11 @@ def creerFrameConnexion(parent,valider,quitter, creerCreerCompte):
 
 
 
+
+
+# Création des textes et Entry
+# --------------------------------------------------------------------------------------------
+
     canva.create_text(200,100, text= "Connexion", justify=CENTER, fill = "firebrick", font="Rye 50")
 
     canva.create_text(200,300, text= "Identifiant : ", justify=CENTER, fill = "gold", font="Limelight 27")
@@ -36,7 +41,10 @@ def creerFrameConnexion(parent,valider,quitter, creerCreerCompte):
     entree_mdp = Entry(canva, width=50,show="*")
     entree_mdp.place(x=550,y=392)
 
+# --------------------------------------------------------------------------------------------
 
+# Création des boutons
+# --------------------------------------------------------------------------------------------
 
     bouton_creer_compte = Button(parent,text="Créer un nouveau compte", command=creerCreerCompte, width=30,height=2)     #CHANGER DE FRAME
     bouton_valider = Button(parent,text="Se connecter", command=valider,width=30,height=2)
@@ -44,6 +52,10 @@ def creerFrameConnexion(parent,valider,quitter, creerCreerCompte):
     bouton_creer_compte.place(x=425,y=500)
     bouton_valider.place(x=800,y=500)
     bouton_quit.place(x=1250,y=700)  
+
+# --------------------------------------------------------------------------------------------
+
+
 
     return {
         "frame": frame_connexion,

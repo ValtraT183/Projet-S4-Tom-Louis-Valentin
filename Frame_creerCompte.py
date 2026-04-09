@@ -12,8 +12,8 @@ def creerFrameCreerCompte(parent, retourner, valider_nouveau_compte, quitter):
     # Création du canva
     canva = Canvas(frame_creercompte, height=750, width=1500)
     canva.pack()
-    # Fond de la fenêtre
 
+    # Fond de la fenêtre
     image = Image.open("Image/background.png")
     image = image.resize((1500, 750))
     canva.photo_background = ImageTk.PhotoImage(image)
@@ -24,6 +24,11 @@ def creerFrameCreerCompte(parent, retourner, valider_nouveau_compte, quitter):
     canva.create_image(750,100,image = canva.titre)
 
 
+
+
+
+# Création des textes
+# --------------------------------------------------------------------------------------------
 
     canva.create_text(240,100, text= "Création du compte", justify=CENTER, fill = "firebrick", font="Rye 31")
 
@@ -40,13 +45,19 @@ def creerFrameCreerCompte(parent, retourner, valider_nouveau_compte, quitter):
     entree_age = ttk.Combobox(canva, width = 47,values=liste_age, state="readonly")
     entree_age.place(x=550,y=442)
 
+# --------------------------------------------------------------------------------------------
+
+
+
+
+
     
-# case à cocher pour les règles de confidentialité 
+# Création des Entry
+# --------------------------------------------------------------------------------------------
 
     etat = BooleanVar()
     politique = Checkbutton(frame_creercompte, text="Veuillez accepter nos règles de confidentialité", variable=etat, font=("Arial 10"))
     politique.place(x=800, y=500)
-
 
 
     bouton_creer_compte = Button(canva,text="Créer un nouveau compte", command=valider_nouveau_compte,width=30,height=2)      
@@ -55,6 +66,8 @@ def creerFrameCreerCompte(parent, retourner, valider_nouveau_compte, quitter):
     bouton_creer_compte.place(x=425,y=600)
     bouton_valider.place(x=800,y=600)
     bouton_quit.place(x=1250,y=700)  
+
+# --------------------------------------------------------------------------------------------
 
 
 

@@ -2,11 +2,17 @@ from PIL import Image, ImageTk
 
 
 def recup_image(carte):
+        """
+        Cette fonction récupère les images des cartes dans le dossier image
+        """
 
         img = Image.open(f"Image/{carte}.png")
         img = img.resize((100,150))
         return ImageTk.PhotoImage(img)
-        
+
+
+
+
 
 cartes_dict = {
         "carreau-2": 2, "carreau-3": 3, "carreau-4": 4, "carreau-5": 5, "carreau-6": 6, "carreau-7": 7,
@@ -22,7 +28,11 @@ cartes_dict = {
         "pique-8": 8, "pique-9": 9, "pique-10": 10, "pique-valet": 10, "pique-dame": 10, "pique-roi": 10, "pique-as": 11
         }       
 
+
 def calcul_score(liste_carte):
+        """
+        Cette fonction calcule le score d'une liste de carte
+        """
         somme = 0
         nb_as = 0
         for carte in liste_carte:
@@ -46,6 +56,10 @@ def calcul_score(liste_carte):
         return somme
 
 
+
+
+
+#Fonction pour calculer le gain du joueur en fonction de la mise
 def recup_gain(mise, win):
         """
         win = 0 --> le joueur a perdu
