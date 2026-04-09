@@ -1,11 +1,38 @@
 from random import*
 
-selection = {"type": None, "valeur": None}    # Pour l'affichage de la sélection
 
 
 
+
+
+# Dictionnaire pour l'affichage de la sélection
+# -------------------------------------------------------------------------------------------
+
+selection = {"type": None, "valeur": None}    
+
+# -------------------------------------------------------------------------------------------
+
+
+
+
+
+
+# Liste ordre numéro roulette (sens horaire)
+# -------------------------------------------------------------------------------------------
 
 ordre_roulette = [0,32, 15, 19, 4, 21, 2, 25, 17, 34,6, 27, 13, 36, 11, 30, 8, 23, 10, 5,24, 16, 33, 1, 20, 14, 31, 9, 22, 18,29, 7, 28, 12, 35, 3, 26]
+
+# -------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+# Fonction création dictionnaire --> clé : position sur la roue / valeur : liste avec numero et la couleur [numero,couleur]
+# -------------------------------------------------------------------------------------------
 
 def creation_dic(ordre):
 
@@ -27,12 +54,34 @@ def creation_dic(ordre):
     
     return dic
 
+# -------------------------------------------------------------------------------------------
 
 
 
-case_numero_et_couleur = creation_dic(ordre_roulette)  #  clé : psotion sur la roue / valeur : liste avec numero et la couleur [numero,couleur]
 
 
+
+
+
+
+# Création du dictionnaire --> clé : position sur la roue / valeur : liste avec numero et la couleur [numero,couleur]
+# -------------------------------------------------------------------------------------------
+ 
+case_numero_et_couleur = creation_dic(ordre_roulette)  
+
+# -------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+# Création du dictionnaire -->  # clé : position sur la roue / valeur : tuple coordonnées x et y (x,y)
+# -------------------------------------------------------------------------------------------
 
 case_coordonnees = { 1 : (900,245),
                     2 : (918,245),
@@ -75,11 +124,21 @@ case_coordonnees = { 1 : (900,245),
                     
                     
 
-}                                                    # clé : position sur la roue / valeur : tuple coordonnées x et y (x,y)
+}         
+
+# -------------------------------------------------------------------------------------------
 
 
 
 
+
+
+
+
+
+
+# Fonction création chemin (pour l'animation)
+# -------------------------------------------------------------------------------------------
 
 def creation_chemin() :
 
@@ -95,9 +154,20 @@ def creation_chemin() :
     
     return chemin 
 
+# -------------------------------------------------------------------------------------------
 
 
 
+
+
+
+
+
+
+
+
+# Fonction récuperer gain
+# -------------------------------------------------------------------------------------------
 
 def recup_gain(mise,selection,case) :
     
@@ -111,7 +181,9 @@ def recup_gain(mise,selection,case) :
         return mise*30
     else :
         return 0
-        
+
+# -------------------------------------------------------------------------------------------
+       
 
 
 

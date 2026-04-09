@@ -3,10 +3,20 @@ from PIL import Image, ImageTk
 from random import*
 
 
+# Fonction créer frame menu
+# -------------------------------------------------------------------------------------------
 
 def creerFrameMenu(parent, retourner, nom_uti, solde_uti, quitter, creerMachineASous, creerJeuDeDes, creerBlackjack, creerRoulette):
     
-   
+
+
+
+
+
+
+# Fonction affichage de la Newsletter
+# -------------------------------------------------------------------------------------------
+
     def affichageNewsletter(liste):
         canva.delete("newsletter")
         info = randint(0,len(liste)-1)
@@ -111,7 +121,19 @@ def creerFrameMenu(parent, retourner, nom_uti, solde_uti, quitter, creerMachineA
             
             canva.after(10000,lambda :affichageNewsletter(liste))
 
-          
+# -------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+# Fonction récuperer l'indice du solde le plus haut dans le txt
+# -------------------------------------------------------------------------------------------
+
     def indiceSoldeLePlusHaut():
         with open("Compte.txt","r",encoding="utf8") as compte :
             lignes = compte.readlines()
@@ -127,8 +149,18 @@ def creerFrameMenu(parent, retourner, nom_uti, solde_uti, quitter, creerMachineA
                     haut = soldes[i]
 
             return indice
-                    
-                
+
+# -------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+# Fonction récuperer le nom de l'utilisateur qui a le plus haut solde et son solde 
+# -------------------------------------------------------------------------------------------
 
     def nomSoldeUtiStar(indice) :
         with open("Compte.txt","r",encoding="utf8") as compte :
@@ -136,56 +168,176 @@ def creerFrameMenu(parent, retourner, nom_uti, solde_uti, quitter, creerMachineA
             info_joueur = lignes[indice].strip().split("/")
             return (info_joueur[0],info_joueur[2])
         
+# -------------------------------------------------------------------------------------------
+
+
+
+
+
+
 
     
     # Création de la frame
+# -------------------------------------------------------------------------------------------
+
     frame_menu = Frame(parent, width=1500, height=750)
 
+# -------------------------------------------------------------------------------------------
+
+
+
+
+
+
     # Création du canva
+# -------------------------------------------------------------------------------------------
+
     canva = Canvas(frame_menu, width=1500, height=750)
     canva.pack()
 
+# -------------------------------------------------------------------------------------------
+
+
+
+
+
+
     # Fond de la fenêtre
+# -------------------------------------------------------------------------------------------
+
     image = Image.open("Image/background.png")
     image = image.resize((1500, 750))
     canva.photo_background = ImageTk.PhotoImage(image)
     canva.create_image(0, 0, anchor=NW, image=canva.photo_background)
 
+# -------------------------------------------------------------------------------------------
+
+
+
+
+
+
 
     # Titre
+# -------------------------------------------------------------------------------------------
+
     canva.titre = PhotoImage(file="Image/titre.png").subsample(2)
     canva.create_image(750,100,image = canva.titre)
 
+# -------------------------------------------------------------------------------------------
 
-    # Création des boutons
+
+
+
+
+
+
+
+    # Création du boutton blackjack
+# -------------------------------------------------------------------------------------------
+
     blackjack = Button(canva,text = "BlackJack",width=50,height=2, command=creerBlackjack)
     blackjack.place(x=580,y=250)
 
+# -------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+    # Création du boutton machine à sous
+# -------------------------------------------------------------------------------------------
+
     machine = Button(canva,text="Machine à sous",width=50,height=2, command=creerMachineASous)
     machine.place(x=580,y=350)
+# -------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+   # Création du boutton roulette
+# -------------------------------------------------------------------------------------------
 
     roulette = Button(canva,text="Roulette",width=50,height=2, command=creerRoulette)
     roulette.place(x=580,y=450)
 
+# -------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+# Création du boutton machine à dés
+# -------------------------------------------------------------------------------------------
 
     des = Button(canva,text="Jeu de dés",width=50,height=2, command=creerJeuDeDes)
     des.place(x=580,y=550)
 
+# -------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+    
+    # Création du boutton se déconnecter
+# -------------------------------------------------------------------------------------------
+
     retour = Button(canva, text="Se déconnecter", width=30, height=2, command=retourner)
     retour.place(x=1250, y=600)
+
+# -------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+    # Création du boutton quitter
+# -------------------------------------------------------------------------------------------
 
     quitt = Button(canva,text="Quitter",width=30,height=2,bg="red", command=quitter)
     quitt.place(x=1250,y=700)
 
+# -------------------------------------------------------------------------------------------
+
+
+
+
+
 
 
     # Affichage du nom de l'utilisateur et du solde
+# -------------------------------------------------------------------------------------------
 
     canva.create_text(1350,50,text=f"Nom d'utilisateur : {nom_uti}",font=("Arial",15),fill="white")
     canva.create_text(1350,100,text=f"Solde : {solde_uti} VTL",font=("Arial",15),fill="white")
 
+# -------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
 
     # Affichage de la newsletter
+# -------------------------------------------------------------------------------------------
 
     nom,solde= nomSoldeUtiStar(indiceSoldeLePlusHaut())
 
@@ -211,6 +363,11 @@ def creerFrameMenu(parent, retourner, nom_uti, solde_uti, quitter, creerMachineA
 
     affichageNewsletter(newsletter)
 
+# -------------------------------------------------------------------------------------------
+
+
+
+
 
 
 
@@ -220,5 +377,7 @@ def creerFrameMenu(parent, retourner, nom_uti, solde_uti, quitter, creerMachineA
         "nom": nom_uti,
         "solde_uti": solde_uti
     }
+
+# -------------------------------------------------------------------------------------------
 
 
