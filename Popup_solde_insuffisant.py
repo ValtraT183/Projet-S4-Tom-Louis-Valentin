@@ -1,8 +1,10 @@
 from tkinter import *
 
 
-def affichierPopUpSoldeInsuffisant(parent):
-
+def afficherPopUpSoldeInsuffisant(parent):
+    """
+    Création d'une nouvelle fenêtre avec le texte associé au problème
+    """
     fen = Toplevel(parent)
     fen.iconbitmap("Image/casinologo.ico")
 

@@ -11,8 +11,11 @@ from Fonctions_utiles import verif_mise, verif_solde
 def creerFrameBlackjack(fenetre, fin_jeu, nom, solde, quitter, blackjackToConnexion):
     solde_joueur = int(solde)
 
-
+    # Fonction pour lancer une partie
     def commencer_partie():
+        """
+        Cette fonction lance une partie
+        """
         global carte_croupier
         global carte_joueur
         global croupier_cache
@@ -39,7 +42,7 @@ def creerFrameBlackjack(fenetre, fin_jeu, nom, solde, quitter, blackjackToConnex
         afficher_carte()
         afficher_score()
 
-        verif_blackjack_initial()
+        verif_blackjack_initial()   #On vérifie si un joueur a déjà gagné
 
 
 
@@ -59,10 +62,8 @@ def creerFrameBlackjack(fenetre, fin_jeu, nom, solde, quitter, blackjackToConnex
             if len(carte_joueur) == 2 and len(carte_croupier) == 2:
                 return afficher_gain(2)
                  
-
         if score_j == 21 and len(carte_joueur) == 2: #blackjack joueur
             return afficher_gain(3)
-
 
         if score_c == 21 and len(carte_croupier) == 2:#blackjack croupier
             return afficher_gain(0)
@@ -70,6 +71,9 @@ def creerFrameBlackjack(fenetre, fin_jeu, nom, solde, quitter, blackjackToConnex
 
 
     def tirer():
+        """
+        Cette fonction permet au joueur de tirer une nouvelle carte
+        """
         global carte_joueur
 
         carte_joueur.append(tirer_cartes())
@@ -84,6 +88,9 @@ def creerFrameBlackjack(fenetre, fin_jeu, nom, solde, quitter, blackjackToConnex
         
 
     def rester():
+        """
+        Cette fonction permet au joueur de rester sur sa position
+        """
         global carte_croupier
         global croupier_cache
 
@@ -93,10 +100,13 @@ def creerFrameBlackjack(fenetre, fin_jeu, nom, solde, quitter, blackjackToConnex
         croupier_cache = False
         afficher_carte()
         afficher_score()
-        canva.after(2000, jouer_croupier)
+        canva.after(2000, jouer_croupier) #Le croupier tire ses cartes
 
 
     def jouer_croupier():
+        """
+        Cette fonction récursive permet au croupier de tirer ses cartes jusqu'à sa limite
+        """
         global carte_croupier
 
         score = calcul_score(carte_croupier)
@@ -116,6 +126,9 @@ def creerFrameBlackjack(fenetre, fin_jeu, nom, solde, quitter, blackjackToConnex
         
 
     def verif_21_ou_plus(score,croupier_ou_joueur):
+        """
+        Cette fonction regarde si le joueur ou le croupier à dépassé 21
+        """
         global carte_croupier
         global carte_joueur
 
@@ -136,6 +149,9 @@ def creerFrameBlackjack(fenetre, fin_jeu, nom, solde, quitter, blackjackToConnex
 
 
     def verif_score():
+        """
+        On regarde quel joueur à le plus de points
+        """
         global carte_croupier
         global carte_joueur
 
@@ -174,6 +190,10 @@ def creerFrameBlackjack(fenetre, fin_jeu, nom, solde, quitter, blackjackToConnex
 
 
     def actualiser_solde(gain, mise):
+        """
+        Cette fonction actualise le solde du joueur sur la frame du jeu.
+        on vérifie que le joueur a assez de VTL pour continuer de joueur sur le casino
+        """
         nonlocal solde_joueur
 
         solde_joueur = solde_joueur - mise + gain
@@ -190,9 +210,13 @@ def creerFrameBlackjack(fenetre, fin_jeu, nom, solde, quitter, blackjackToConnex
 
         actualiser_solde_txt(solde_joueur, nom)
 
-    # Fonction actualiser le solde dans le txt
 
+
+    # Fonction actualiser le solde dans le txt
     def actualiser_solde_txt(nouveau_solde, nom):
+        """
+        Cette fonction actualise le solde du joueur dans le fichier compte.txt
+        """
         global solde_courant
         solde_courant = nouveau_solde
         lignes=[]
@@ -213,7 +237,9 @@ def creerFrameBlackjack(fenetre, fin_jeu, nom, solde, quitter, blackjackToConnex
 
 
     def reset():
-
+        """
+        Cette fonction réactive les boutons désactivé et efface les affichages liés à la partie
+        """
         commencer.config(state = ACTIVE)
         retour.config(state = ACTIVE)
         quitt.config(state = NORMAL)
@@ -240,10 +266,15 @@ def creerFrameBlackjack(fenetre, fin_jeu, nom, solde, quitter, blackjackToConnex
         "pique-8", "pique-9", "pique-10", "pique-valet", "pique-dame", "pique-roi", "pique-as" 
         ]
        
-        return choice(liste_cartes)
+        return choice(liste_cartes) # on tire une carte au hasard
     
 
+
+
     def afficher_score():
+        """
+        Cette fonction affiche le score du joueur et le score du croupier (en fonction de si la carte du caché du croupier l'est encore ou pas)
+        """
         global carte_joueur
         global carte_croupier  
         global croupier_cache
@@ -264,6 +295,9 @@ def creerFrameBlackjack(fenetre, fin_jeu, nom, solde, quitter, blackjackToConnex
 
     #fonction pour afficher les cartes sur la frame
     def afficher_carte():
+        """
+        Cette fonction permet d'afficher les cartes du joueur et du croupier en fonction du nombre de carte qu'ils ont
+        """
         global carte_croupier
         global carte_joueur
         global croupier_cache
@@ -324,9 +358,9 @@ def creerFrameBlackjack(fenetre, fin_jeu, nom, solde, quitter, blackjackToConnex
     canva.create_line(450,0,450,750,fill="black",width=2)
 
 
-   
-    # Création des tables
 
+# --------------------------------------------------------------------------------------------
+    # Création des tables
 
     # table du haut
 
@@ -343,7 +377,9 @@ def creerFrameBlackjack(fenetre, fin_jeu, nom, solde, quitter, blackjackToConnex
     canva.create_line(550,500,550,650,fill="white",width="2")
     canva.create_line(950,500,950,650,fill="white",width="2")
 
-   
+# --------------------------------------------------------------------------------------------
+
+
     # Affichage du nom de l'utilisateur et du solde
 
     canva.create_text(1350,50,text=f"Nom d'utilisateur : {nom}",font=("Arial",15),fill="white")
@@ -391,6 +427,7 @@ def creerFrameBlackjack(fenetre, fin_jeu, nom, solde, quitter, blackjackToConnex
 
 
     # Affichage des règles
+# --------------------------------------------------------------------------------------------
 
     canva.create_text(220,120, text="Le joueur mise puis reçoit deux cartes visibles.", fill="gold", font="Limelight 13")
     
@@ -417,6 +454,8 @@ def creerFrameBlackjack(fenetre, fin_jeu, nom, solde, quitter, blackjackToConnex
     canva.create_text(220,660, text="est la meilleure main ", fill="gold", font="Limelight 13")
     canva.create_text(220,680, text="et gagne immédiatement (x3)", fill="gold", font="Limelight 13")
   
+  # --------------------------------------------------------------------------------------------
+
 
     return {
         "frame": frame_blackjack,
