@@ -365,19 +365,19 @@ def creerFrameBlackjack(fenetre, fin_jeu, nom, solde, quitter, blackjackToConnex
 
     # Débuter la partie
 
-    commencer = Button(canva,text="Commencer une partie",width=20,command=commencer_partie)
+    commencer = Button(canva,text="Commencer une partie",width=20,command=commencer_partie,height=2)
     commencer.place(x=1250,y=400)
 
 
     # Création bouton tirer une carte
 
-    bouton_tirer = Button(canva,text="Tirer",width=20,command=tirer, state=DISABLED)
-    bouton_tirer.place(x=575,y=700)
+    bouton_tirer = Button(canva,text="Tirer",width=20,command=tirer, state=DISABLED,height=2)
+    bouton_tirer.place(x=575,y=690)
         
     # Bouton rester
 
-    bouton_rester = Button(canva,text="Rester",width=20,command=rester, state=DISABLED)
-    bouton_rester.place(x=775,y=700)
+    bouton_rester = Button(canva,text="Rester",width=20,command=rester, state=DISABLED,height=2)
+    bouton_rester.place(x=775,y=690)
 
 
     # Création menu déroulant pour sélectionner la mise 
@@ -386,7 +386,7 @@ def creerFrameBlackjack(fenetre, fin_jeu, nom, solde, quitter, blackjackToConnex
     mise = ttk.Combobox(canva,values=liste_mise,state="readonly",width=21)
     mise.current(0)
     mise.place(x=1250,y=350)    
-    canva.create_text(1280,300,text="Mise :",font="Limelight 19",fill="gold")
+    canva.create_text(1200,360,text="Mise :",font="Limelight 19",fill="gold")
 
 
 
